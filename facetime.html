@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FaceTime UI</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 390px;
+      height: 844px;
+      background-color: black;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .facetime-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      box-sizing: border-box;
+    }
+
+    .facetime-header {
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    .facetime-video {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .facetime-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .facetime-footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .end-call-button {
+      width: 70px;
+      height: 70px;
+      background-color: #ff3b30;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .end-call-button::before {
+      content: "";
+      width: 30px;
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+      transform: rotate(0deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="facetime-container">
+    <div class="facetime-header">FaceTime</div>
+
+    <div class="facetime-video">
+      <video autoplay muted loop playsinline>
+        <source src="videos/weverse_20241102035102_1317778128.MP4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="facetime-footer">
+      <div class="end-call-button"></div>
+    </div>
+  </div>
+</body>
+</html>
