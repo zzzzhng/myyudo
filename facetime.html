@@ -2,144 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>FaceTime UI</title>
+  <meta name="viewport" content="width=390, user-scalable=no" />
+  <title>FaceTime Incoming</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
       width: 390px;
-      height: 750px;
+      height: 730px; /* 주소창 고려하여 높이 조정 */
       overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       position: relative;
+      background-color: black;
     }
 
-    video.background {
+    video {
       position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;
+      z-index: 0;
     }
 
     .overlay {
       position: absolute;
+      z-index: 1;
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 40px 0;
+      top: 0;
+      left: 0;
       color: white;
       text-align: center;
     }
 
-    .title {
-      margin-top: 40px;
+    .caller-info {
+      margin-top: 75px;
     }
 
-    .title h1 {
-      font-size: 24px;
+    .caller-info h1 {
+      font-size: 28px;
+      margin: 0;
       font-weight: 500;
     }
 
-    .title p {
-      font-size: 17px;
-      opacity: 0.8;
+    .caller-info p {
+      font-size: 18px;
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.8);
     }
 
-    .actions-top, .actions-bottom {
+    .icon-button-row {
       display: flex;
       justify-content: space-around;
-      align-items: center;
-      padding: 0 30px;
+      margin-top: 350px;
     }
 
-    .btn {
+    .icon-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .btn-icon {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .icon-group svg {
+      width: 28px;
+      height: 28px;
     }
 
-    .btn-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
+    .icon-group span {
+      font-size: 14px;
     }
 
-    .btn-label {
-      font-size: 13px;
-    }
-
-    .call-actions {
+    .action-button-row {
       display: flex;
       justify-content: space-around;
+      margin-top: 30px;
+    }
+
+    .action-group {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 0 60px;
-      margin-bottom: 20px;
+      gap: 8px;
     }
 
-    .call-btn img {
-      width: 70px;
-      height: 70px;
+    .action-group img {
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: center;
     }
 
-    .call-label {
+    .end-accept {
       font-size: 14px;
-      margin-top: 6px;
     }
   </style>
 </head>
 <body>
-  <video class="background" autoplay muted loop>
-    <source src="videos/shinyu.MP4" type="video/mp4">
-  </video>
+  <video src="videos/shinyu.MP4" autoplay muted loop playsinline></video>
+
   <div class="overlay">
-    <div class="title">
+    <div class="caller-info">
       <h1>Mom</h1>
       <p>FaceTime Video</p>
     </div>
 
-    <div class="actions-top">
-      <div class="btn">
-        <div class="btn-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1-1-1v-2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1zm6.36-4.36a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41 7.966 7.966 0 0 0 0-11.31 1 1 0 0 1 1.41-1.41 9.966 9.966 0 0 1 0 14.14zM5.05 5.05a9.966 9.966 0 0 1 0 14.14 1 1 0 0 1-1.41-1.41 7.966 7.966 0 0 0 0-11.31 1 1 0 0 1 1.41-1.41zM17 12a1 1 0 0 1-1 1H8a1 1 0 1 1 0-2h8a1 1 0 0 1 1 1z"/></svg>
-        </div>
-        <div class="btn-label">Remind Me</div>
+    <!-- Remind Me & Message -->
+    <div class="icon-button-row">
+      <div class="icon-group">
+        <!-- iOS 스타일의 알람 시계 아이콘 -->
+        <svg fill="white" viewBox="0 0 24 24">
+          <path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0-2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm-1 5h2v5h-2V7zm0 6h2v2h-2v-2z"/>
+        </svg>
+        <span>Remind Me</span>
       </div>
-
-      <div class="btn">
-        <div class="btn-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 6.5a2.5 2.5 0 0 1-2.5-2.5H19a1 1 0 1 0-2 0h-.5a2.5 2.5 0 0 1-5 0H11a1 1 0 1 0-2 0H8.5a2.5 2.5 0 0 1-5 0H3a1 1 0 1 0-2 0h.5a2.5 2.5 0 0 1 5 0h.5a2.5 2.5 0 0 1 5 0h.5a2.5 2.5 0 0 1 5 0H19a2.5 2.5 0 0 1 2.5 2.5z"/></svg>
-        </div>
-        <div class="btn-label">Message</div>
+      <div class="icon-group">
+        <!-- iOS 스타일의 메시지 아이콘 -->
+        <svg fill="white" viewBox="0 0 24 24">
+          <path d="M2 3h20v14H6l-4 4V3z" />
+        </svg>
+        <span>Message</span>
       </div>
     </div>
 
-    <div class="call-actions">
-      <div class="btn call-btn">
-        <img src="images/d1.PNG" alt="Decline">
-        <div class="call-label">Decline</div>
+    <!-- Decline & Accept -->
+    <div class="action-button-row">
+      <div class="action-group">
+        <img src="images/de.PNG" alt="Decline" />
+        <div class="end-accept">Decline</div>
       </div>
-      <div class="btn call-btn">
-        <img src="images/d2.PNG" alt="Accept">
-        <div class="call-label">End & Accept</div>
+      <div class="action-group">
+        <img src="images/ac.PNG" alt="Accept" />
+        <div class="end-accept">Accept</div>
       </div>
     </div>
   </div>
