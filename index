@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- 뷰포트: 390px 너비 고정 -->
+  <!-- 뷰포트: 아이폰 12 기준 너비 390px -->
   <meta name="viewport" content="width=390, initial-scale=1.0" />
   <title>I♡IK - Home</title>
   <style>
