@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, user-scalable=no" />
-  <title>FaceTime Incoming</title>
+  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FaceTime UI</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', sans-serif;
     }
 
     body {
       width: 390px;
       height: 750px;
       overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
       position: relative;
-      background: black;
     }
 
-    video {
+    video.background {
       position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      z-index: -1;
     }
 
     .overlay {
@@ -34,140 +34,112 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 30px 20px 40px;
+      padding: 40px 0;
       color: white;
       text-align: center;
     }
 
-    .caller {
+    .title {
       margin-top: 40px;
     }
 
-    .caller h1 {
+    .title h1 {
       font-size: 24px;
-      font-weight: 600;
+      font-weight: 500;
     }
 
-    .caller p {
+    .title p {
       font-size: 17px;
-      opacity: 0.9;
+      opacity: 0.8;
     }
 
-    .top-icons {
+    .actions-top, .actions-bottom {
       display: flex;
-      justify-content: space-between;
-      margin: 0 20px;
-      align-items: flex-end;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 30px;
     }
 
-    .top-icon {
+    .btn {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
     }
 
-    .top-icon svg {
-      width: 26px;
-      height: 26px;
-      fill: white;
-    }
-
-    .top-icon span {
-      font-size: 14px;
-    }
-
-    .bottom-buttons {
+    .btn-icon {
+      width: 40px;
+      height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 40px;
-      margin-top: auto;
     }
 
-    .btn img {
-      width: 65px;
-      height: 65px;
-      object-fit: contain;
-      border-radius: 100%;
+    .btn-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
     }
 
     .btn-label {
-      margin-top: 6px;
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    .accept-wrapper {
+    .call-actions {
       display: flex;
-      flex-direction: column;
+      justify-content: space-around;
       align-items: center;
+      padding: 0 60px;
+      margin-bottom: 20px;
     }
 
-    .accept-icons {
-      position: relative;
-      width: 80px;
-      height: 65px;
+    .call-btn img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: contain;
     }
 
-    .accept-icons img {
-      position: absolute;
-      width: 65px;
-      height: 65px;
-      border-radius: 100%;
-    }
-
-    .accept-icons img:first-child {
-      left: 0;
-      top: 0;
-    }
-
-    .accept-icons img:last-child {
-      left: 15px;
-      top: 0;
-    }
-
-    .accept-label {
-      margin-top: 6px;
+    .call-label {
       font-size: 14px;
+      margin-top: 6px;
     }
   </style>
 </head>
 <body>
-  <video src="videos/shinyu.MP4" autoplay muted loop playsinline></video>
-
+  <video class="background" autoplay muted loop>
+    <source src="videos/shinyu.MP4" type="video/mp4">
+  </video>
   <div class="overlay">
-    <div class="caller">
-      <h1>신정환</h1>
+    <div class="title">
+      <h1>Mom</h1>
       <p>FaceTime Video</p>
     </div>
 
-    <div class="top-icons">
-      <div class="top-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 22c1.104 0 2-.896 2-2h-4c0 1.104.896 2 2 2zm6.364-6.364l1.414 1.414c.39.39.39 1.024 0 1.414l-1.414 1.414c-.39.39-1.024.39-1.414 0l-1.414-1.414c-.39-.39-.39-1.024 0-1.414l1.414-1.414c.39-.39 1.024-.39 1.414 0zM18 10c0-3.866-3.134-7-7-7S4 6.134 4 10v4l-2 2v1h20v-1l-2-2v-4z"/>
-        </svg>
-        <span>Remind Me</span>
+    <div class="actions-top">
+      <div class="btn">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1-1-1v-2a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1zm6.36-4.36a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41 7.966 7.966 0 0 0 0-11.31 1 1 0 0 1 1.41-1.41 9.966 9.966 0 0 1 0 14.14zM5.05 5.05a9.966 9.966 0 0 1 0 14.14 1 1 0 0 1-1.41-1.41 7.966 7.966 0 0 0 0-11.31 1 1 0 0 1 1.41-1.41zM17 12a1 1 0 0 1-1 1H8a1 1 0 1 1 0-2h8a1 1 0 0 1 1 1z"/></svg>
+        </div>
+        <div class="btn-label">Remind Me</div>
       </div>
 
-      <div class="top-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v16l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-        </svg>
-        <span>Message</span>
+      <div class="btn">
+        <div class="btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 6.5a2.5 2.5 0 0 1-2.5-2.5H19a1 1 0 1 0-2 0h-.5a2.5 2.5 0 0 1-5 0H11a1 1 0 1 0-2 0H8.5a2.5 2.5 0 0 1-5 0H3a1 1 0 1 0-2 0h.5a2.5 2.5 0 0 1 5 0h.5a2.5 2.5 0 0 1 5 0h.5a2.5 2.5 0 0 1 5 0H19a2.5 2.5 0 0 1 2.5 2.5z"/></svg>
+        </div>
+        <div class="btn-label">Message</div>
       </div>
     </div>
 
-    <div class="bottom-buttons">
-      <div class="btn">
+    <div class="call-actions">
+      <div class="btn call-btn">
         <img src="images/d1.PNG" alt="Decline">
-        <div class="btn-label">Decline</div>
+        <div class="call-label">Decline</div>
       </div>
-      <div class="accept-wrapper">
-        <div class="accept-icons">
-          <img src="images/d1.PNG" alt="Decline small">
-          <img src="images/d2.PNG" alt="Accept">
-        </div>
-        <div class="accept-label">Accept</div>
+      <div class="btn call-btn">
+        <img src="images/d2.PNG" alt="Accept">
+        <div class="call-label">End & Accept</div>
       </div>
     </div>
   </div>
