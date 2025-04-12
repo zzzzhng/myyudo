@@ -1,138 +1,128 @@
-<!-- FaceTime 스타일 페이지 (아이콘 없는 텍스트 버튼) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=390, height=844, user-scalable=no" />
   <title>FaceTime</title>
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: black;
-      overflow: hidden;
+      box-sizing: border-box;
     }
-
-    .iphone-frame {
+    body {
       width: 390px;
       height: 844px;
-      position: relative;
       overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: white;
+      position: relative;
     }
-
     video {
       position: absolute;
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-
     .overlay {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 20px;
-      box-sizing: border-box;
-      color: white;
+      padding: 40px 20px 60px;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    .caller-info {
       text-align: center;
+      margin-top: 30px;
     }
-
-    .overlay .top {
-      margin-top: 40px;
-    }
-
-    .overlay .top .name {
+    .caller-info h2 {
       font-size: 28px;
       font-weight: 500;
     }
-
-    .overlay .top .desc {
-      font-size: 16px;
-      opacity: 0.9;
+    .caller-info p {
+      font-size: 18px;
+      opacity: 0.8;
+      margin-top: 4px;
     }
-
-    .overlay .bottom {
+    .top-icons {
       display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin-bottom: 40px;
+      justify-content: space-between;
+      padding: 0 50px;
+      margin-top: auto;
     }
-
-    .btn {
+    .icon-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: white;
-      font-size: 13px;
       gap: 8px;
+      font-size: 14px;
     }
-
-    .accept-combo {
-      position: relative;
-      width: 60px;
-      height: 60px;
+    .icon-group svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
     }
-
-    .accept-combo img:first-child {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 2;
-      width: 60px;
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 40px;
     }
-
-    .accept-combo img:last-child {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      width: 60px;
+    .button-img {
+      width: 70px;
+      height: 70px;
     }
-
-    .btn img {
-      width: 60px;
-      height: 60px;
+    .end-accept-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .end-accept-container img {
+      width: 85px;
+      height: auto;
+    }
+    .end-accept-container span {
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="iphone-frame">
-    <video autoplay muted loop playsinline>
-      <source src="weverse_20241102035102_1317778128.MP4" type="video/mp4" />
-    </video>
-
-    <div class="overlay">
-      <div class="top">
-        <div class="name">Mom</div>
-        <div class="desc">FaceTime Video</div>
+  <video autoplay muted loop>
+    <source src="weverse_20241102035102_1317778128.MP4" type="video/mp4" />
+  </video>
+  <div class="overlay">
+    <div class="caller-info">
+      <h2>Mom</h2>
+      <p>FaceTime Video</p>
+    </div>
+    <div class="top-icons">
+      <div class="icon-group">
+        <!-- Clock Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1.75a10.25 10.25 0 1 0 0 20.5 10.25 10.25 0 0 0 0-20.5Zm0 18.5a8.25 8.25 0 1 1 0-16.5 8.25 8.25 0 0 1 0 16.5Zm.75-8.68V6.5a.75.75 0 0 0-1.5 0v5.25c0 .414.336.75.75.75h3a.75.75 0 0 0 0-1.5h-2.25Z"/></svg>
+        <span>Remind Me</span>
       </div>
-
-      <div class="bottom">
-        <div class="btn">Remind Me</div>
-        <div class="btn">Message</div>
-        <div class="btn">
-          <img src="images/decline.PNG" alt="Decline" />
-          Decline
-        </div>
-        <div class="btn">
-          <div class="accept-combo">
-            <img src="images/accept.PNG" alt="Accept" />
-            <img src="images/decline.PNG" alt="Decline base" />
-          </div>
-          End & Accept
-        </div>
+      <div class="icon-group">
+        <!-- Message Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.016 2 11c0 2.162.936 4.136 2.49 5.651l-.764 3.493a.5.5 0 0 0 .638.583l3.889-1.111C9.187 20.527 10.574 21 12 21c5.514 0 10-4.016 10-9s-4.486-10-10-10z"/></svg>
+        <span>Message</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <div class="icon-group">
+        <img src="decline.PNG" alt="Decline" class="button-img" />
+        <span>Decline</span>
+      </div>
+      <div class="end-accept-container">
+        <img src="accept.PNG" alt="End & Accept" />
+        <span>End & Accept</span>
       </div>
     </div>
   </div>
 </body>
 </html>
-
