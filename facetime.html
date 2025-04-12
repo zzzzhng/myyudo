@@ -1,78 +1,69 @@
+<!-- FaceTime 스타일 페이지 (아이콘 없는 텍스트 버튼) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>FaceTime Call</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FaceTime</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      width: 390px;
-      height: 844px;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
       overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      position: relative;
     }
 
-    video.bg-video {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .iphone-frame {
       width: 390px;
       height: 844px;
+      position: relative;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      z-index: 0;
     }
 
     .overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 390px;
-      height: 844px;
-      z-index: 1;
-      color: white;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 30px 20px;
+      padding: 20px;
       box-sizing: border-box;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-    }
-
-    .caller-info {
-      text-align: center;
-      margin-top: 60px;
-    }
-
-    .caller-info h1 {
-      margin: 0;
-      font-size: 30px;
-      font-weight: 600;
-    }
-
-    .caller-info p {
-      margin: 4px 0 0;
-      font-size: 18px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .top-options {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 30px;
-      font-size: 14px;
       color: white;
+      text-align: center;
+    }
+
+    .overlay .top {
+      margin-top: 40px;
+    }
+
+    .overlay .top .name {
+      font-size: 28px;
+      font-weight: 500;
+    }
+
+    .overlay .top .desc {
+      font-size: 16px;
       opacity: 0.9;
     }
 
-    .bottom-buttons {
+    .overlay .bottom {
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
-      gap: 40px;
       margin-bottom: 40px;
     }
 
@@ -80,99 +71,68 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 12px;
       color: white;
+      font-size: 13px;
+      gap: 8px;
     }
 
-    .btn .circle {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-
-    .decline .circle {
-      background-color: #ff3b30;
-    }
-
-    .accept .circle {
-      background-color: #4cd964;
+    .accept-combo {
       position: relative;
+      width: 60px;
+      height: 60px;
     }
 
-    .accept .circle::before {
-      content: "";
+    .accept-combo img:first-child {
       position: absolute;
-      width: 40px;
-      height: 40px;
-      background-color: #ff3b30;
-      border-radius: 50%;
-      top: -10px;
-      left: -10px;
-      z-index: -1;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 60px;
     }
 
-    .circle i {
-      font-style: normal;
-      font-size: 20px;
+    .accept-combo img:last-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 60px;
     }
 
-    .home-indicator {
-      height: 5px;
-      width: 135px;
-      background-color: rgba(255,255,255,0.3);
-      border-radius: 3px;
-      margin: 0 auto;
-      margin-bottom: 8px;
+    .btn img {
+      width: 60px;
+      height: 60px;
     }
   </style>
 </head>
 <body>
-  <video class="bg-video" autoplay muted loop playsinline>
-    <source src="videos/weverse_20241102035102_1317778128.MP4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <div class="iphone-frame">
+    <video autoplay muted loop playsinline>
+      <source src="weverse_20241102035102_1317778128.MP4" type="video/mp4" />
+    </video>
 
-  <div class="overlay">
-    <div class="caller-info">
-      <h1>Mom</h1>
-      <p>FaceTime Video</p>
-    </div>
+    <div class="overlay">
+      <div class="top">
+        <div class="name">Mom</div>
+        <div class="desc">FaceTime Video</div>
+      </div>
 
-    <div class="top-options">
-      <div class="btn">
-        <div class="circle" style="background-color: rgba(255,255,255,0.2);">
-          <i>⏰</i>
+      <div class="bottom">
+        <div class="btn">Remind Me</div>
+        <div class="btn">Message</div>
+        <div class="btn">
+          <img src="images/decline.PNG" alt="Decline" />
+          Decline
         </div>
-        Remind Me
-      </div>
-      <div class="btn">
-        <div class="circle" style="background-color: rgba(255,255,255,0.2);">
-          <i>💬</i>
+        <div class="btn">
+          <div class="accept-combo">
+            <img src="images/accept.PNG" alt="Accept" />
+            <img src="images/decline.PNG" alt="Decline base" />
+          </div>
+          End & Accept
         </div>
-        Message
-      </div>
-    </div>
-
-    <div class="bottom-buttons">
-      <div class="btn decline">
-        <div class="circle">
-          <i>📞</i>
-        </div>
-        Decline
-      </div>
-      <div class="btn accept">
-        <div class="circle">
-          <i>📞</i>
-        </div>
-        End & Accept
       </div>
     </div>
-
-    <div class="home-indicator"></div>
   </div>
 </body>
 </html>
+
