@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- 뷰포트: 390px 너비 고정 -->
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>About Me - iMessage Style</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: white;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      width: 390px;
+      /* 높이는 JS로 설정 */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .chat-container {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+    .message {
+      position: relative;
+      max-width: 75%;
+      padding: 10px 14px;
+      border-radius: 20px;
+      font-size: 15px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      background-color: #f1f0f0;
+      color: #000;
+      /* 메시지 등장 애니메이션 */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.3s forwards;
+    }
+    .from-me {
+      align-self: flex-end;
+      background-color: #007AFF;
+      color: white;
+    }
+    /* 원래 방식의 말풍선 꼬리 디자인 */
+    .from-me::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-top-color: #007AFF;
+      border-bottom: 0;
+      border-right: 0;
+      margin-bottom: -1px;
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .input-area {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #ccc;
+      padding: 10px;
+      background-color: white;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 16px;
+      outline: none;
+    }
+    button {
+      margin-left: 10px;
+      background-color: #007AFF;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      line-height: 1;
+    }
+    button:hover {
+      background-color: #005BBB;
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container" id="chat">
+    <div class="message from-me">Welcome to my portfolio!</div>
+  </div>
+  <div class="input-area">
+    <input type="text" id="messageInput" placeholder="메시지를 입력하세요" />
+    <button onclick="sendMessage()">↑</button>
+  </div>
+  <script>
+    function setBodyHeight() {
+      document.body.style.height = window.innerHeight + "px";
+    }
+    setBodyHeight();
+    window.addEventListener('resize', setBodyHeight);
+    
+    function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+      if (message === "") return;
+      const chat = document.getElementById('chat');
+      const bubble = document.createElement('div');
+      bubble.classList.add('message', 'from-me');
+      bubble.textContent = message;
+      chat.appendChild(bubble);
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
