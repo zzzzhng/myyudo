@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- 뷰포트: 390px 너비 고정 -->
   <meta name="viewport" content="width=390, initial-scale=1.0" />
   <title>About Me - iMessage Style</title>
   <style>
@@ -11,12 +10,13 @@
       background-color: white;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       width: 390px;
-      /* 높이는 JS로 설정 */
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 100vh;
     }
+
     .chat-container {
       padding: 20px;
       display: flex;
@@ -25,6 +25,7 @@
       overflow-y: auto;
       flex-grow: 1;
     }
+
     .message {
       position: relative;
       max-width: 75%;
@@ -35,19 +36,20 @@
       word-wrap: break-word;
       background-color: #f1f0f0;
       color: #000;
-      /* 메시지 등장 애니메이션 */
       opacity: 0;
       transform: translateY(20px);
       animation: slideUp 0.3s forwards;
     }
+
     .from-me {
       align-self: flex-end;
       background-color: #007AFF;
       color: white;
     }
-    /* 원래 방식의 말풍선 꼬리 디자인 */
+
+    /* 말풍선 꼬리: 초기 단순한 형태 */
     .from-me::after {
-      content: "";
+      content: \"\";
       position: absolute;
       bottom: 0;
       right: -10px;
@@ -59,6 +61,7 @@
       border-right: 0;
       margin-bottom: -1px;
     }
+
     @keyframes slideUp {
       from {
         opacity: 0;
@@ -69,6 +72,7 @@
         transform: translateY(0);
       }
     }
+
     .input-area {
       display: flex;
       align-items: center;
@@ -76,7 +80,8 @@
       padding: 10px;
       background-color: white;
     }
-    input[type="text"] {
+
+    input[type=\"text\"] {
       flex: 1;
       padding: 10px 14px;
       border: 1px solid #ccc;
@@ -84,6 +89,7 @@
       font-size: 16px;
       outline: none;
     }
+
     button {
       margin-left: 10px;
       background-color: #007AFF;
@@ -97,20 +103,10 @@
       justify-content: center;
       align-items: center;
       font-size: 20px;
-      line-height: 1;
     }
+
     button:hover {
       background-color: #005BBB;
-    }
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
   </style>
 </head>
@@ -124,21 +120,21 @@
   </div>
   <script>
     function setBodyHeight() {
-      document.body.style.height = window.innerHeight + "px";
+      document.body.style.height = window.innerHeight + \"px\";
     }
     setBodyHeight();
     window.addEventListener('resize', setBodyHeight);
-    
+
     function sendMessage() {
       const input = document.getElementById('messageInput');
       const message = input.value.trim();
-      if (message === "") return;
+      if (message === \"\") return;
       const chat = document.getElementById('chat');
       const bubble = document.createElement('div');
       bubble.classList.add('message', 'from-me');
       bubble.textContent = message;
       chat.appendChild(bubble);
-      input.value = "";
+      input.value = \"\";
       chat.scrollTop = chat.scrollHeight;
     }
   </script>
