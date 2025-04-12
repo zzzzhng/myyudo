@@ -2,26 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>iPhone UI Portfolio</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      width: 390px;
-      height: 100vh; /* 여기만 수정됨 */
-      overflow: hidden;
+      width: 100%;
+      height: 100vh;
       background-color: #f2f2f7;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .screen {
-      width: 100%;
-      height: 100%;
-      position: relative;
+    .iphone-frame {
+      width: 390px;
+      height: 844px;
+      background-color: #f2f2f7;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      overflow: hidden;
+      position: relative;
     }
 
     .content {
@@ -35,13 +40,12 @@
     }
 
     .dock {
-      height: 100px;
+      height: 120px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 20px;
-      padding-bottom: 20px;
-      background-color: transparent;
+      gap: 24px;
+      padding-bottom: 24px;
     }
 
     .dock img {
@@ -55,10 +59,8 @@
   </style>
 </head>
 <body>
-  <div class="screen">
-    <div class="content">
-      Hello
-    </div>
+  <div class="iphone-frame">
+    <div class="content">Hello</div>
     <div class="dock">
       <img src="images/icon.phone.webp" alt="Phone" />
       <a href="about.html">
@@ -69,3 +71,4 @@
   </div>
 </body>
 </html>
+
