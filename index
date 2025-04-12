@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- 뷰포트: 390px 너비 고정 -->
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>I♡IK - Home</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: white;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      width: 390px;
+      /* 높이는 JS로 설정 */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      color: #222;
+    }
+    /* 하단 탭바 */
+    .tabbar {
+      height: 60px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #ffffff;
+      box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+    }
+    .tabbar a {
+      text-decoration: none;
+      color: #007AFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+    }
+    .tabbar a svg {
+      margin-bottom: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>I♡IK</h1>
+  </div>
+  <div class="tabbar">
+    <!-- 전화 아이콘 -->
+    <a href="#">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#007AFF" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27 11.72 11.72 0 003.68.59 1 1 0 011 1v3.59a1 1 0 01-1 1A16.92 16.92 0 013 4a1 1 0 011-1h3.59a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.27 1.11l-2.29 2.29z"/>
+      </svg>
+      전화
+    </a>
+    <!-- 문자 아이콘: 클릭 시 about.html로 이동 -->
+    <a href="about.html">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#007AFF" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2H4a2 2 0 00-2 2v16l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2z"/>
+      </svg>
+      문자
+    </a>
+    <!-- 애플뮤직 아이콘 -->
+    <a href="#">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="#007AFF" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3v10.55a4 4 0 10-2-3.45V6h4v7a4 4 0 10-2-3.45V3z"/>
+      </svg>
+      애플뮤직
+    </a>
+  </div>
+  <script>
+    function setBodyHeight() {
+      document.body.style.height = window.innerHeight + "px";
+    }
+    setBodyHeight();
+    window.addEventListener('resize', setBodyHeight);
+  </script>
+</body>
+</html>
