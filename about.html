@@ -51,7 +51,21 @@
       align-self: flex-end;
       background-color: #007AFF;
       color: white;
+    }
 
+    /* 내 메시지의 말풍선 꼬리 (오른쪽 아래에 작게 표시) */
+    .from-me::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-top-color: #007AFF;
+      border-bottom: 0;
+      border-right: 0;
+      margin-bottom: -1px;
     }
 
     /* 전송 입력 영역 */
@@ -113,6 +127,8 @@
   <!-- 채팅 메시지 표시 영역 -->
   <div class="chat-container" id="chat">
     <!-- 초기 메시지 예시 -->
+    <div class="message from-me">Welcome to my portfolio!</div>
+  </div>
 
   <!-- 메시지 입력 및 전송 영역 -->
   <div class="input-area">
@@ -142,6 +158,10 @@
       chat.scrollTop = chat.scrollHeight;
     }
   </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
