@@ -5,15 +5,19 @@
   <meta name="viewport" content="width=390, user-scalable=no" />
   <title>FaceTime Incoming</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', sans-serif;
+    }
+
+    body {
       width: 390px;
-      height: 790px; /* 주소창 고려해서 810 → 790으로 줄임 */
+      height: 750px;
       overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       position: relative;
-      background-color: black;
+      background: black;
     }
 
     video {
@@ -21,81 +25,109 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 0;
     }
 
     .overlay {
       position: absolute;
-      z-index: 1;
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 20px 40px;
       color: white;
       text-align: center;
     }
 
-    .caller-info {
-      margin-top: 75px;
+    .caller {
+      margin-top: 40px;
     }
 
-    .caller-info h1 {
-      font-size: 28px;
-      margin: 0;
-      font-weight: 500;
+    .caller h1 {
+      font-size: 24px;
+      font-weight: 600;
     }
 
-    .caller-info p {
-      font-size: 18px;
-      margin-top: 4px;
-      color: rgba(255, 255, 255, 0.8);
+    .caller p {
+      font-size: 17px;
+      opacity: 0.9;
     }
 
-    .icon-button-row {
+    .top-icons {
       display: flex;
-      justify-content: space-around;
-      margin-top: 390px;
+      justify-content: space-between;
+      margin: 0 20px;
+      align-items: flex-end;
     }
 
-    .icon-group {
+    .top-icon {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .icon-group svg {
-      width: 28px;
-      height: 28px;
+    .top-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: white;
     }
 
-    .icon-group span {
+    .top-icon span {
       font-size: 14px;
     }
 
-    .action-button-row {
+    .bottom-buttons {
       display: flex;
-      justify-content: space-around;
-      margin-top: 30px;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: auto;
     }
 
-    .action-group {
+    .btn img {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      border-radius: 100%;
+    }
+
+    .btn-label {
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .accept-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
     }
 
-    .action-group img {
+    .accept-icons {
+      position: relative;
+      width: 80px;
+      height: 65px;
+    }
+
+    .accept-icons img {
+      position: absolute;
       width: 65px;
       height: 65px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center;
-      box-shadow: 0 0 0 2px white; /* 동그란 테두리로 깔끔하게 정리 */
+      border-radius: 100%;
     }
 
-    .end-accept {
+    .accept-icons img:first-child {
+      left: 0;
+      top: 0;
+    }
+
+    .accept-icons img:last-child {
+      left: 15px;
+      top: 0;
+    }
+
+    .accept-label {
+      margin-top: 6px;
       font-size: 14px;
     }
   </style>
@@ -104,41 +136,40 @@
   <video src="videos/shinyu.MP4" autoplay muted loop playsinline></video>
 
   <div class="overlay">
-    <div class="caller-info">
-      <h1>Mom</h1>
+    <div class="caller">
+      <h1>신정환</h1>
       <p>FaceTime Video</p>
     </div>
 
-    <!-- Remind Me & Message -->
-    <div class="icon-button-row">
-      <div class="icon-group">
-        <!-- iOS-style alarm clock icon -->
-        <svg fill="white" viewBox="0 0 24 24">
-          <path d="M12 7a1 1 0 0 1 1 1v4.28l2.4 1.39a1 1 0 1 1-1 1.73l-3-1.74A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1zm0-5a9 9 0 1 1 0 18 9 9 0 0 1 0-18zm0-2C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0z"/>
+    <div class="top-icons">
+      <div class="top-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 22c1.104 0 2-.896 2-2h-4c0 1.104.896 2 2 2zm6.364-6.364l1.414 1.414c.39.39.39 1.024 0 1.414l-1.414 1.414c-.39.39-1.024.39-1.414 0l-1.414-1.414c-.39-.39-.39-1.024 0-1.414l1.414-1.414c.39-.39 1.024-.39 1.414 0zM18 10c0-3.866-3.134-7-7-7S4 6.134 4 10v4l-2 2v1h20v-1l-2-2v-4z"/>
         </svg>
         <span>Remind Me</span>
       </div>
-      <div class="icon-group">
-        <!-- iOS-style message bubble icon -->
-        <svg fill="white" viewBox="0 0 24 24">
-          <path d="M2 3h20v14H6l-4 4V3z" />
+
+      <div class="top-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v16l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
         </svg>
         <span>Message</span>
       </div>
     </div>
 
-    <!-- Decline & Accept with image clipping -->
-    <div class="action-button-row">
-      <div class="action-group">
-        <img src="images/d1.PNG" alt="Decline" />
-        <div class="end-accept">Decline</div>
+    <div class="bottom-buttons">
+      <div class="btn">
+        <img src="images/d1.PNG" alt="Decline">
+        <div class="btn-label">Decline</div>
       </div>
-      <div class="action-group">
-        <img src="images/d2.PNG" alt="Accept" />
-        <div class="end-accept">End & Accept</div>
+      <div class="accept-wrapper">
+        <div class="accept-icons">
+          <img src="images/d1.PNG" alt="Decline small">
+          <img src="images/d2.PNG" alt="Accept">
+        </div>
+        <div class="accept-label">Accept</div>
       </div>
     </div>
   </div>
 </body>
 </html>
-
