@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Chat - iMessage</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      background-color: #e5e5ea;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 0;
       width: 390px;
       height: 844px;
       overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: white;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .chat-container {
+      flex: 1;
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       overflow-y: auto;
-      flex-grow: 1;
     }
 
     .message {
@@ -53,28 +53,24 @@
     }
 
     .typing-indicator {
-      width: 60px;
-      height: 30px;
-      background-color: #E1E1E1;
+      width: 40px;
+      height: 20px;
+      background: #d1d1d6;
       border-radius: 20px;
+      align-self: flex-start;
       display: flex;
       align-items: center;
       justify-content: center;
-      align-self: flex-start;
-      animation: fadeInUp 0.3s forwards;
-    }
-
-    .typing-indicator::before {
-      content: '...';
-      font-size: 20px;
+      font-size: 14px;
       color: #555;
     }
 
     .input-area {
+      flex-shrink: 0;
       display: flex;
       border-top: 1px solid #ccc;
       padding: 10px;
-      background-color: #fff;
+      background-color: white;
     }
 
     input[type="text"] {
@@ -91,6 +87,7 @@
       background-color: #007AFF;
       color: white;
       border: none;
+      padding: 0 14px;
       font-size: 20px;
       border-radius: 50%;
       cursor: pointer;
@@ -125,23 +122,24 @@
 
       const chat = document.getElementById('chat');
 
-      // 타자 애니메이션 추가
+      // 타이핑 인디케이터
       const typing = document.createElement('div');
       typing.classList.add('typing-indicator');
+      typing.textContent = '...';
       chat.appendChild(typing);
       chat.scrollTop = chat.scrollHeight;
 
-      // 일정 시간 후 말풍선으로 교체
       setTimeout(() => {
         chat.removeChild(typing);
+
         const bubble = document.createElement('div');
         bubble.classList.add('message', 'from-me');
         bubble.textContent = message;
         chat.appendChild(bubble);
-        chat.scrollTop = chat.scrollHeight;
-      }, 800); // 0.8초 후 메시지 표시
 
-      input.value = "";
+        input.value = "";
+        chat.scrollTop = chat.scrollHeight;
+      }, 500); // 딜레이 후 메시지 출력
     }
   </script>
 
