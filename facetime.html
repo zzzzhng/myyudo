@@ -3,93 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>FaceTime UI</title>
+  <title>FaceTime Call</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       width: 390px;
       height: 844px;
-      background-color: black;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      color: white;
       overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      position: relative;
     }
 
-    .facetime-container {
-      width: 100%;
-      height: 100%;
+    video.bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 390px;
+      height: 844px;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 390px;
+      height: 844px;
+      z-index: 1;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+    }
+
+    .caller-info {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .caller-info h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    .caller-info p {
+      margin: 4px 0 0;
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .top-options {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px;
+      font-size: 14px;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .bottom-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .btn {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      padding: 40px 0;
-      box-sizing: border-box;
+      font-size: 12px;
+      color: white;
     }
 
-    .facetime-header {
-      font-size: 20px;
-      font-weight: 600;
-      margin-top: 20px;
-    }
-
-    .facetime-video {
-      width: 160px;
-      height: 160px;
+    .btn .circle {
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    }
-
-    .facetime-video video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .facetime-footer {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 8px;
     }
 
-    .end-call-button {
-      width: 70px;
-      height: 70px;
+    .decline .circle {
+      background-color: #ff3b30;
+    }
+
+    .accept .circle {
+      background-color: #4cd964;
+      position: relative;
+    }
+
+    .accept .circle::before {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 40px;
       background-color: #ff3b30;
       border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      cursor: pointer;
+      top: -10px;
+      left: -10px;
+      z-index: -1;
     }
 
-    .end-call-button::before {
-      content: "";
-      width: 30px;
-      height: 4px;
-      background-color: white;
-      border-radius: 2px;
-      transform: rotate(0deg);
+    .circle i {
+      font-style: normal;
+      font-size: 20px;
+    }
+
+    .home-indicator {
+      height: 5px;
+      width: 135px;
+      background-color: rgba(255,255,255,0.3);
+      border-radius: 3px;
+      margin: 0 auto;
+      margin-bottom: 8px;
     }
   </style>
 </head>
 <body>
-  <div class="facetime-container">
-    <div class="facetime-header">FaceTime</div>
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="videos/weverse_20241102035102_1317778128.MP4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-    <div class="facetime-video">
-      <video autoplay muted loop playsinline>
-        <source src="videos/weverse_20241102035102_1317778128.MP4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+  <div class="overlay">
+    <div class="caller-info">
+      <h1>Mom</h1>
+      <p>FaceTime Video</p>
     </div>
 
-    <div class="facetime-footer">
-      <div class="end-call-button"></div>
+    <div class="top-options">
+      <div class="btn">
+        <div class="circle" style="background-color: rgba(255,255,255,0.2);">
+          <i>⏰</i>
+        </div>
+        Remind Me
+      </div>
+      <div class="btn">
+        <div class="circle" style="background-color: rgba(255,255,255,0.2);">
+          <i>💬</i>
+        </div>
+        Message
+      </div>
     </div>
+
+    <div class="bottom-buttons">
+      <div class="btn decline">
+        <div class="circle">
+          <i>📞</i>
+        </div>
+        Decline
+      </div>
+      <div class="btn accept">
+        <div class="circle">
+          <i>📞</i>
+        </div>
+        End & Accept
+      </div>
+    </div>
+
+    <div class="home-indicator"></div>
   </div>
 </body>
 </html>
