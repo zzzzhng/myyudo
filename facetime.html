@@ -9,9 +9,9 @@
       margin: 0;
       padding: 0;
       width: 390px;
-      height: 810px;
+      height: 790px; /* 주소창 고려해서 810 → 790으로 줄임 */
       overflow: hidden;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       position: relative;
       background-color: black;
     }
@@ -36,7 +36,7 @@
     }
 
     .caller-info {
-      margin-top: 80px;
+      margin-top: 75px;
     }
 
     .caller-info h1 {
@@ -51,42 +51,51 @@
       color: rgba(255, 255, 255, 0.8);
     }
 
-    .top-buttons {
+    .icon-button-row {
       display: flex;
-      justify-content: space-between;
-      padding: 0 40px;
-      margin-top: 400px;
+      justify-content: space-around;
+      margin-top: 390px;
     }
 
-    .top-buttons div {
+    .icon-group {
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 14px;
-      color: white;
+      gap: 8px;
     }
 
-    .top-buttons svg {
+    .icon-group svg {
       width: 28px;
       height: 28px;
-      margin-bottom: 6px;
     }
 
-    .bottom-buttons {
+    .icon-group span {
+      font-size: 14px;
+    }
+
+    .action-button-row {
       display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-top: 40px;
+      justify-content: space-around;
+      margin-top: 30px;
     }
 
-    .bottom-buttons img {
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-group img {
       width: 65px;
       height: 65px;
       border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 0 0 2px white; /* 동그란 테두리로 깔끔하게 정리 */
     }
 
     .end-accept {
-      margin-top: 10px;
       font-size: 14px;
     }
   </style>
@@ -100,24 +109,31 @@
       <p>FaceTime Video</p>
     </div>
 
-    <div class="top-buttons">
-      <div>
-        <!-- Bell icon for Remind Me -->
-        <svg fill="white" viewBox="0 0 24 24"><path d="M10 21h4a2 2 0 1 1-4 0Zm8-5v-5a6 6 0 1 0-12 0v5l-2 2v1h16v-1l-2-2Z"/></svg>
+    <!-- Remind Me & Message -->
+    <div class="icon-button-row">
+      <div class="icon-group">
+        <!-- iOS-style alarm clock icon -->
+        <svg fill="white" viewBox="0 0 24 24">
+          <path d="M12 7a1 1 0 0 1 1 1v4.28l2.4 1.39a1 1 0 1 1-1 1.73l-3-1.74A1 1 0 0 1 11 12V8a1 1 0 0 1 1-1zm0-5a9 9 0 1 1 0 18 9 9 0 0 1 0-18zm0-2C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0z"/>
+        </svg>
         <span>Remind Me</span>
       </div>
-      <div>
-        <!-- Message bubble icon -->
-        <svg fill="white" viewBox="0 0 24 24"><path d="M2 3h20v14H6l-4 4V3z"/></svg>
+      <div class="icon-group">
+        <!-- iOS-style message bubble icon -->
+        <svg fill="white" viewBox="0 0 24 24">
+          <path d="M2 3h20v14H6l-4 4V3z" />
+        </svg>
         <span>Message</span>
       </div>
     </div>
 
-    <div class="bottom-buttons">
-      <div>
+    <!-- Decline & Accept with image clipping -->
+    <div class="action-button-row">
+      <div class="action-group">
         <img src="images/d1.PNG" alt="Decline" />
+        <div class="end-accept">Decline</div>
       </div>
-      <div>
+      <div class="action-group">
         <img src="images/d2.PNG" alt="Accept" />
         <div class="end-accept">End & Accept</div>
       </div>
@@ -126,4 +142,3 @@
 </body>
 </html>
 
-</html>
