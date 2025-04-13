@@ -170,7 +170,6 @@
 
     .image-message {
       width: 200px;
-      height: 200px;
       border-radius: 18px;
       object-fit: cover;
     }
@@ -197,20 +196,19 @@
       wrapper.className = 'message-wrapper';
       wrapper.style.justifyContent = isUser ? 'flex-end' : 'flex-start';
 
-      const msg = document.createElement('div');
-      msg.className = 'message';
-      if (!isUser) msg.classList.add('incoming');
-
       if (isImage) {
         const img = document.createElement('img');
         img.src = 'images/m1.png';
         img.className = 'image-message';
-        msg.appendChild(img);
+        wrapper.appendChild(img);
       } else {
+        const msg = document.createElement('div');
+        msg.className = 'message';
+        if (!isUser) msg.classList.add('incoming');
         msg.textContent = text;
+        wrapper.appendChild(msg);
       }
 
-      wrapper.appendChild(msg);
       messages.appendChild(wrapper);
       messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
     }
