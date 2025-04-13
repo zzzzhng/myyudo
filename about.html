@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=390, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
-  <title>iMessage UI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, user-scalable=no" />
+  <title>iMessage</title>
   <style>
     * {
       box-sizing: border-box;
@@ -16,26 +16,28 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
     }
 
     .container {
       width: 390px;
-      height: 710px; /* Safari 주소창 고려해서 줄임 */
+      height: 710px; /* 고정 높이로 스크롤 제거 */
       background-color: white;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
     .messages {
       flex: 1;
       padding: 12px 14px;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      overflow-y: auto;
     }
 
     .message-wrapper {
@@ -47,8 +49,8 @@
       background-color: #007aff;
       color: white;
       padding: 10px 14px;
-      max-width: 80%;
       font-size: 15px;
+      max-width: 80%;
       animation: messageSend 0.3s ease forwards;
       opacity: 0;
 
@@ -79,7 +81,6 @@
 
     .input-icons {
       display: flex;
-      gap: 8px;
       margin-right: 8px;
     }
 
@@ -98,7 +99,7 @@
       flex: 1;
       padding: 10px 14px;
       border-radius: 20px;
-      border: 1px solid #e0e0e0;
+      border: 1px solid #ddd;
       font-size: 15px;
       outline: none;
     }
@@ -124,14 +125,12 @@
   </style>
 </head>
 <body>
-
   <div class="container">
     <div class="messages" id="messages"></div>
 
     <div class="input-area">
       <div class="input-icons">
         <div class="icon">+</div>
-        <div class="icon">🎤</div>
       </div>
       <input type="text" id="messageInput" placeholder="iMessage">
       <div class="send-button" onclick="sendMessage()">↑</div>
@@ -163,6 +162,5 @@
       });
     }
   </script>
-
 </body>
 </html>
