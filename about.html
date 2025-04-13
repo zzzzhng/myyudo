@@ -22,12 +22,11 @@
 
     .container {
       width: 390px;
-      height: 740px; /* 주소창 고려해서 줄임 */
+      height: 710px; /* Safari 주소창 고려해서 줄임 */
       background-color: white;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border-radius: 0;
     }
 
     .messages {
@@ -72,9 +71,27 @@
 
     .input-area {
       display: flex;
+      align-items: center;
       padding: 8px 10px;
       border-top: 1px solid #ddd;
       background-color: #f9f9f9;
+    }
+
+    .input-icons {
+      display: flex;
+      gap: 8px;
+      margin-right: 8px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      font-size: 20px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
 
     .input-area input {
@@ -101,7 +118,6 @@
       user-select: none;
     }
 
-    /* 모바일 스크롤 부드럽게 */
     .messages::-webkit-scrollbar {
       display: none;
     }
@@ -111,7 +127,12 @@
 
   <div class="container">
     <div class="messages" id="messages"></div>
+
     <div class="input-area">
+      <div class="input-icons">
+        <div class="icon">+</div>
+        <div class="icon">🎤</div>
+      </div>
       <input type="text" id="messageInput" placeholder="iMessage">
       <div class="send-button" onclick="sendMessage()">↑</div>
     </div>
@@ -145,4 +166,3 @@
 
 </body>
 </html>
-
