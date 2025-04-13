@@ -1,147 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Chat - iMessage</title>
+  <meta charset="UTF-8">
+  <title>iMessage UI</title>
   <style>
-    html, body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      width: 390px;
-      height: 844px;
-      overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    }
+
+    .container {
+      width: 840px;
+      height: 710px;
       background-color: white;
+      border-radius: 30px;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
     }
 
-    .chat-container {
+    .messages {
       flex: 1;
       padding: 20px;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
+      gap: 12px;
+    }
+
+    .message-wrapper {
+      display: flex;
+      justify-content: flex-end;
     }
 
     .message {
-      max-width: 75%;
-      padding: 10px 14px;
-      border-radius: 20px;
-      font-size: 15px;
-      line-height: 1.4;
-      word-wrap: break-word;
+      background-color: #007aff;
+      color: white;
+      padding: 12px 18px;
+      max-width: 60%;
+      font-size: 16px;
+      animation: messageSend 0.3s ease forwards;
       opacity: 0;
-      transform: translateY(10px);
-      animation: fadeInUp 0.3s forwards;
+
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 6px; /* ← 여기를 직각 느낌으로 */
     }
 
-    @keyframes fadeInUp {
-      to {
+    @keyframes messageSend {
+      0% {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+      }
+      100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1) translateY(0);
       }
     }
 
-    .from-me {
-      align-self: flex-end;
-      background-color: #007AFF;
-      color: white;
-      border-bottom-right-radius: 2px;
-    }
-
-    .typing-indicator {
-      width: 40px;
-      height: 20px;
-      background: #d1d1d6;
-      border-radius: 20px;
-      align-self: flex-start;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #555;
-    }
-
     .input-area {
-    flex-shrink: 0;
-    display: flex;
-    border-top: 1px solid #ccc;
-    padding: 16px 14px 20px;
-    background-color: white;
-    margin-bottom: 10px; /* 이 부분이 추가됨 → 입력창 전체 위치 위로 띄움 */
+      display: flex;
+      padding: 10px 15px;
+      border-top: 1px solid #ddd;
+      background-color: #f9f9f9;
     }
 
-
-    input[type="text"] {
+    .input-area input {
       flex: 1;
-      padding: 10px 14px;
-      border: 1px solid #ccc;
+      padding: 12px 16px;
       border-radius: 20px;
+      border: 1px solid #e0e0e0; /* 연한 회색 테두리 */
       font-size: 16px;
       outline: none;
     }
 
-    button {
+    .send-button {
       margin-left: 10px;
-      background-color: #007AFF;
+      background-color: #007aff;
       color: white;
-      border: none;
-      padding: 0 14px;
       font-size: 20px;
-      border-radius: 50%;
-      cursor: pointer;
       width: 40px;
       height: 40px;
+      border-radius: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
-    }
-
-    button:hover {
-      background-color: #005BBB;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
     }
   </style>
 </head>
 <body>
 
-  <div class="chat-container" id="chat">
-    <div class="message from-me">Hi, this is my portfolio ✨</div>
-  </div>
-
-  <div class="input-area">
-    <input type="text" id="messageInput" placeholder="iMessage처럼 입력해보세요" />
-    <button onclick="sendMessage()">➤</button>
+  <div class="container">
+    <div class="messages" id="messages"></div>
+    <div class="input-area">
+      <input type="text" id="messageInput" placeholder="iMessage">
+      <div class="send-button" onclick="sendMessage()">↑</div>
+    </div>
   </div>
 
   <script>
     function sendMessage() {
       const input = document.getElementById('messageInput');
-      const message = input.value.trim();
-      if (message === "") return;
+      const text = input.value.trim();
+      if (!text) return;
 
-      const chat = document.getElementById('chat');
+      const messages = document.getElementById('messages');
 
-      // 타이핑 인디케이터
-      const typing = document.createElement('div');
-      typing.classList.add('typing-indicator');
-      typing.textContent = '...';
-      chat.appendChild(typing);
-      chat.scrollTop = chat.scrollHeight;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'message-wrapper';
 
-      setTimeout(() => {
-        chat.removeChild(typing);
+      const message = document.createElement('div');
+      message.className = 'message';
+      message.textContent = text;
 
-        const bubble = document.createElement('div');
-        bubble.classList.add('message', 'from-me');
-        bubble.textContent = message;
-        chat.appendChild(bubble);
+      wrapper.appendChild(message);
+      messages.appendChild(wrapper);
+      input.value = "";
 
-        input.value = "";
-        chat.scrollTop = chat.scrollHeight;
-      }, 500); // 딜레이 후 메시지 출력
+      messages.scrollTo({
+        top: messages.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   </script>
 
