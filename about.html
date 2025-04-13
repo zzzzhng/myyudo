@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=390, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>iMessage</title>
   <style>
     * {
@@ -11,20 +11,20 @@
       padding: 0;
     }
 
-    body {
+    html, body {
       background-color: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
     }
 
     .container {
       width: 390px;
-      height: 844px; /* ✅ 고정 높이 수정 */
+      height: 710px;
       background-color: white;
       display: flex;
       flex-direction: column;
@@ -38,6 +38,7 @@
       flex-direction: column;
       gap: 10px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .message-wrapper {
@@ -53,7 +54,6 @@
       max-width: 80%;
       animation: messageSend 0.3s ease forwards;
       opacity: 0;
-
       border-top-left-radius: 18px;
       border-top-right-radius: 18px;
       border-bottom-left-radius: 18px;
@@ -75,7 +75,6 @@
       display: flex;
       align-items: center;
       padding: 8px 10px;
-      padding-bottom: calc(env(safe-area-inset-bottom) + 8px); /* ✅ 하단 주소창 대비 */
       border-top: 1px solid #ddd;
       background-color: #f9f9f9;
     }
@@ -165,4 +164,3 @@
   </script>
 </body>
 </html>
-
