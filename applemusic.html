@@ -1,48 +1,357 @@
-<style>
-  .shareplay-modal {
-    position: fixed;
-    bottom: -200px;
-    left: 20px;
-    width: 350px;
-    background-color: rgba(240, 240, 240, 0.96);
-    border-radius: 24px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    color: black;
-    transition: bottom 0.5s ease-in-out;
-    z-index: 1000;
-    text-align: center;
-  }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, user-scalable=no" />
+  <title>무제 플레이리스트</title>
+  <style>
+    @font-face {
+      font-family: 'SF Pro Display';
+      src: url('https://cdn.jsdelivr.net/gh/sergienkoekaterina/fonts@main/SFProDisplay-Regular.woff2') format('woff2');
+    }
 
-  .shareplay-modal.show {
-    bottom: 100px;
-  }
+    body {
+      margin: 0;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background-color: white;
+      width: 390px;
+      height: 844px;
+      overflow-y: scroll;
+      position: relative;
+    }
 
-  .shareplay-buttons {
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
+    /* ---------- 기존 Apple Music UI ---------- */
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 16px 12px 8px;
+      font-size: 18px;
+      font-weight: 500;
+    }
 
-  .shareplay-buttons button {
-    flex: 1;
-    padding: 10px 0;
-    font-size: 16px;
-    border-radius: 14px;
-    border: none;
-    font-weight: 600;
-  }
+    .navbar img {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+    }
 
-  .shareplay-buttons .connect {
-    background-color: #007aff;
-    color: white;
-  }
+    .search-bar {
+      margin: 0 16px 16px;
+    }
 
-  .shareplay-buttons .cancel {
-    background-color: #d1d1d6;
-    color: black;
-  }
-</style>
+    .search-bar input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      background-color: #f2f2f7;
+    }
+
+    .playlist-cover {
+      width: 90%;
+      height: 230px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      background-color: #f1f1f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .playlist-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .playlist-updated {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 16px 20px;
+    }
+
+    .controls button {
+      flex: 1;
+      margin: 0 6px;
+      padding: 12px 0;
+      border-radius: 12px;
+      font-size: 16px;
+      border: none;
+      color: white;
+      font-weight: 500;
+    }
+
+    .play-btn {
+      background-color: #ff2d55;
+    }
+
+    .shuffle-btn {
+      background-color: #dcdcdc;
+      color: #ff2d55;
+    }
+
+    .music-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 16px 80px;
+    }
+
+    .music-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .music-cover {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background-color: #ddd;
+      margin-right: 12px;
+    }
+
+    .music-info {
+      font-size: 16px;
+    }
+
+    .now-playing-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 390px;
+      height: 60px;
+      background-color: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 10;
+    }
+
+    .now-playing-cover {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background-color: #ccc;
+    }
+
+    .now-playing-info {
+      flex: 1;
+      margin-left: 12px;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .now-playing-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .now-playing-controls img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ---------- SharePlay 팝업 UI ---------- */
+    .shareplay-popup {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+      width: 360px;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 999;
+      pointer-events: none;
+    }
+
+    .shareplay-popup.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .shareplay-header {
+      text-align: center;
+      padding: 24px 20px 16px;
+    }
+
+    .shareplay-header img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
+    }
+
+    .shareplay-header h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+
+    .shareplay-header p {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .shareplay-profile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f0f0f5;
+      border-radius: 16px;
+      padding: 10px 16px;
+      margin: 16px;
+    }
+
+    .shareplay-profile .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .shareplay-profile .avatar {
+      width: 36px;
+      height: 36px;
+      background: #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .shareplay-profile .name {
+      font-size: 16px;
+    }
+
+    .edit-btn {
+      font-size: 14px;
+      color: #d00;
+      font-weight: 500;
+    }
+
+    .sub-text {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      margin-top: 4px;
+      padding: 0 16px;
+    }
+
+    .shareplay-footer {
+      text-align: center;
+      padding: 0 16px 20px;
+    }
+
+    .shareplay-footer button {
+      background: #d00;
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 0;
+      width: 100%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 기존 Apple Music 페이지 UI -->
+  <div class="navbar">
+    <img src="images/back.svg" alt="Back" />
+    무제 플레이리스트
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="검색" />
+  </div>
+
+  <div class="playlist-cover">커버 이미지 영역</div>
+
+  <div class="playlist-title">무제 플레이리스트</div>
+  <div class="playlist-updated">금요일에 업데이트됨</div>
+
+  <div class="controls">
+    <button class="play-btn">▶ 재생</button>
+    <button class="shuffle-btn">🔀 임의 재생</button>
+  </div>
+
+  <ul class="music-list">
+    <li class="music-item">
+      <div class="music-cover"></div>
+      <div class="music-info">Music 1</div>
+    </li>
+    <li class="music-item">
+      <div class="music-cover"></div>
+      <div class="music-info">Music 2</div>
+    </li>
+    <li class="music-item">
+      <div class="music-cover"></div>
+      <div class="music-info">Music 3</div>
+    </li>
+  </ul>
+
+  <div class="now-playing-bar">
+    <div class="now-playing-cover"></div>
+    <div class="now-playing-info">Nike Shoes (feat. Dynam...</div>
+    <div class="now-playing-controls">
+      <img src="images/pause.svg" alt="Pause" />
+      <img src="images/play.svg" alt="Play" />
+    </div>
+  </div>
+
+  <!-- SharePlay 팝업 -->
+  <div id="shareplay" class="shareplay-popup">
+    <div class="shareplay-header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_Music_icon.svg/1024px-Apple_Music_icon.svg.png" alt="icon" />
+      <h2>○○○님과 연결하시겠습니까?</h2>
+      <p>사용자의 기기에서 Apple Music의<br/>재생 콘텐츠를 제어할 수 있습니다.</p>
+    </div>
+    <div class="shareplay-profile">
+      <div class="left">
+        <div class="avatar">ㅋㅋ</div>
+        <div class="name">ㅋㅋ</div>
+      </div>
+      <div class="edit-btn">편집</div>
+    </div>
+    <div class="sub-text">계정 설정에서 사용자의 이름 및 사진을 언제든지 편집할 수 있습니다.</div>
+    <div class="shareplay-footer">
+      <button>연결</button>
+    </div>
+  </div>
+
+  <!-- 등장 애니메이션 스크립트 -->
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('shareplay').classList.add('show');
+      }, 3000);
+    });
+  </script>
+
+</body>
+</html>
