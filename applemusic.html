@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, user-scalable=no" />
+  <title>무제 플레이리스트</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background-color: white;
+      width: 390px;
+      height: 844px;
+      overflow-y: scroll;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 16px 12px 8px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .navbar img {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+    }
+
+    .search-bar {
+      margin: 0 16px 16px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      background-color: #f2f2f7;
+    }
+
+    .playlist-cover {
+      width: 90%;
+      height: 230px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      background-color: #f1f1f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 14px;
+    }
+
+    .playlist-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .playlist-updated {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 16px 20px;
+    }
+
+    .controls button {
+      flex: 1;
+      margin: 0 6px;
+      padding: 12px 0;
+      border-radius: 12px;
+      font-size: 16px;
+      border: none;
+      color: white;
+      font-weight: 500;
+    }
+
+    .play-btn {
+      background-color: #ff2d55;
+    }
+
+    .shuffle-btn {
+      background-color: #dcdcdc;
+      color: #ff2d55;
+    }
+
+    .music-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 16px 80px;
+    }
+
+    .music-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .music-cover {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background-color: #ddd;
+      margin-right: 12px;
+    }
+
+    .music-info {
+      font-size: 16px;
+    }
+
+    .now-playing-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 390px;
+      height: 60px;
+      background-color: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+    }
+
+    .now-playing-cover {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background-color: #ccc;
+    }
+
+    .now-playing-info {
+      flex: 1;
+      margin-left: 12px;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .now-playing-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .now-playing-controls img {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <img src="images/back.svg" alt="Back" />
+    무제 플레이리스트
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="검색" />
+  </div>
+
+  <div class="playlist-cover">커버 이미지 영역</div>
+
+  <div class="playlist-title">무제 플레이리스트</div>
+  <div class="playlist-updated">금요일에 업데이트됨</div>
+
+  <div class="controls">
+    <button class="play-btn">▶ 재생</button>
+    <button class="shuffle-btn">🔀 임의 재생</button>
+  </div>
+
+  <ul class="music-list">
+    <li class="music-item">
+      <div class="music-cover"></div>
+      <div class="music-info">Music 1</div>
+    </li>
+    <li class="music-item">
+      <div class="music-cover"></div>
+      <div class="music-info">Music 2</div>
+    </li>
+    <li class="music-item">
+      <div class="music-cover"></div>
+      <div class="music-info">Music 3</div>
+    </li>
+  </ul>
+
+  <div class="now-playing-bar">
+    <div class="now-playing-cover"></div>
+    <div class="now-playing-info">Nike Shoes (feat. Dynam...</div>
+    <div class="now-playing-controls">
+      <img src="images/pause.svg" alt="Pause" />
+      <img src="images/play.svg" alt="Play" />
+    </div>
+  </div>
+
+</body>
+</html>
