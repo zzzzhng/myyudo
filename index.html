@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>iPhone UI Portfolio</title>
   <style>
     html, body {
@@ -56,10 +56,87 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       cursor: pointer;
     }
+
+    /* Lock-style Notification */
+    .lock-alert {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 360px;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      padding: 12px 14px 14px 14px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: top 0.4s ease;
+      z-index: 99;
+    }
+
+    .alert-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .alert-header-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .alert-header img {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .header-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    .header-time {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .alert-sender {
+      margin-top: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      color: #000;
+    }
+
+    .alert-message {
+      font-size: 14px;
+      color: #000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 <body>
   <div class="iphone-frame">
+    <!-- Notification -->
+    <div class="lock-alert" id="lockAlert">
+      <div class="alert-header">
+        <div class="alert-header-left">
+          <img src="images/i2.webp" alt="Messages Icon" />
+          <span class="header-title">MESSAGES</span>
+        </div>
+        <span class="header-time">now</span>
+      </div>
+      <div class="alert-sender">Saraille</div>
+      <div class="alert-message">Oh sugar! Anyone can see this message...</div>
+    </div>
+
+    <!-- Main Content -->
     <div class="content">Hello</div>
     <div class="dock">
       <img src="images/i1.webp" alt="Phone" />
@@ -69,29 +146,14 @@
       <img src="images/i3.webp" alt="Music" />
     </div>
   </div>
-<!-- iMessage-style Notification -->
-<div class="lock-alert" id="lockAlert">
-  <div class="alert-header">
-    <img src="images/i2.webp" alt="Messages Icon" />
-    <span class="header-title">MESSAGES</span>
-    <span class="header-time">now</span>
-  </div>
-  <div class="alert-sender">Saraille</div>
-  <div class="alert-message">Oh sugar! Anyone can see this message...</div>
-</div>
 
-<style>
-  .lock-alert {
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 360px;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 20px;
-    box-shadow: 0 8px 24px
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        const alert = document.getElementById('lockAlert');
+        alert.style.top = '32px';
+      }, 2000);
+    };
+  </script>
 </body>
 </html>
-
