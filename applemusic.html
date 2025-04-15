@@ -162,25 +162,12 @@
     }
 
     .now-playing-bar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 390px;
-      height: 60px;
-      background-color: white;
-      border-top: 1px solid #ddd;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 12px;
-      z-index: 10;
-    }
-
-    .now-playing-cover {
-      width: 40px;
-      height: 40px;
-      border-radius: 6px;
-      background-color: #ccc;
+      width: 100%; /* 390px 대신 이걸 써야 작은 기기에서도 오른쪽이 안 짤림 */
+      box-sizing: border-box;
     }
 
     .now-playing-info {
@@ -195,12 +182,16 @@
     .now-playing-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
-    .now-playing-controls svg {
-      width: 20px;
-      height: 20px;
+    .now-playing-controls button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: #ff2d55;
+      cursor: pointer;
+      padding: 0;
     }
 
     .shareplay-popup {
@@ -390,17 +381,16 @@
     <div class="now-playing-cover"></div>
     <div class="now-playing-info">음악 제목</div>
     <div class="now-playing-controls">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <button>⏸</button>
+      <button>⏭</button>
     </div>
   </div>
 
   <div class="shareplay-popup">
     <div class="shareplay-header">
       <button id="close-shareplay">X</button>
-      <img src="images/SharePlay.png" alt="Profile" />
-      <h2>신정환와(과)연결하겠습니까?</h2>
+      <img src="images/SharePlay.jpg" alt="Profile" />
+      <h2>신정환님과 연결하겠습니까?</h2>
       <p>사용자의 기기에서 Aapple Music의 재생 콘텐츠를 제어할 수 있습니다.</p>
     </div>
 
