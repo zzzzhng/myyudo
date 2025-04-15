@@ -119,10 +119,22 @@
       color: white;
     }
 
-    .shuffle-btn {
-      background-color: #f2f2f2;
+   .shuffle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px; /* 아이콘과 텍스트 사이 간격 */
+      background-color: #dcdcdc;
       color: #ff2d55;
+      font-weight: 500;
     }
+
+  .shuffle-btn .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
 
     .music-list {
       list-style: none;
@@ -343,11 +355,20 @@
     </button>
 
     <button class="shuffle-btn">
-      임의 재생
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 3l10 10M3 13l10-10M4 4h3m5 0h1M9 12h3m0 0h1"/>
+      <span class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff2d55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 위쪽 곡선 -->
+        <path d="M3 6h3c2 0 4 4 6 6s4 4 6 4" />
+      <!-- 위쪽 화살표 -->
+        <polyline points="18 14 21 16 18 18" transform="translate(0 -8)" />
+      <!-- 아래쪽 곡선 -->
+        <path d="M3 18h3c2 0 4-4 6-6s4-4 6-4" />
+      <!-- 아래쪽 화살표 -->
+        <polyline points="18 14 21 16 18 18" transform="translate(0 0)" />
       </svg>
-    </button>
+    </span>
+    임의 재생
+  </button>
   </div>
 
   <ul class="music-list">
@@ -378,30 +399,30 @@
   <div class="shareplay-popup">
     <div class="shareplay-header">
       <button id="close-shareplay">X</button>
-      <img src="images/avatar.jpg" alt="Profile" />
-      <h2>엄마와 공유 중</h2>
-      <p>영상이 공유되고 있습니다.</p>
+      <img src="images/SharePlay.png" alt="Profile" />
+      <h2>신정환와(과)연결하겠습니까?</h2>
+      <p>사용자의 기기에서 Aapple Music의 재생 콘텐츠를 제어할 수 있습니다.</p>
     </div>
 
     <div class="shareplay-profile">
       <div class="left">
-        <div class="avatar">A</div>
-        <div class="name">엄마</div>
+        <div class="avatar">ME</div>
+        <div class="name">ME</div>
       </div>
       <div class="edit-btn">편집</div>
     </div>
 
-    <div class="sub-text">영상 공유 중. 공유를 종료하려면 버튼을 클릭하세요.</div>
+    <div class="sub-text">계정 설정에서 사용자의 이름 및 사진을 언제든지 편집할 수 있습니다.</div>
 
     <div class="shareplay-footer">
-      <button>공유 종료</button>
+      <button>연결</button>
     </div>
   </div>
 
   <script>
     setTimeout(function() {
       document.querySelector('.shareplay-popup').classList.add('show');
-    }, 1500);
+    }, 3500);
 
     document.getElementById('close-shareplay').onclick = function() {
       document.querySelector('.shareplay-popup').classList.remove('show');
