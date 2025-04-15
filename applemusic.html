@@ -34,25 +34,29 @@
       margin-right: 12px;
     }
 
-  .search-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 16px;       /* 양쪽 여백 균등하게 */
-    max-width: 390px;      /* iPhone 12 기준 너비 제한 */
-    margin: 0 auto;        /* 가운데 정렬 */
-    box-sizing: border-box;
-  }
-  .search-bar {
-    flex: 1;
-    height: 36px;
-    padding: 0 12px;
-    border-radius: 10px;
-    background-color: #f1f1f1;
-    font-size: 14px;
-    border: none;
-  }
+    .search-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;       /* 양쪽 여백 균등하게 */
+      max-width: 390px;      /* iPhone 12 기준 너비 제한 */
+      margin: 0 auto;        /* 가운데 정렬 */
+      box-sizing: border-box;
+    }
+    .search-bar {
+      flex: 1;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      font-size: 14px;
+      border: none;
+      color: #333; /* 진한 회색 텍스트 */
+    }
 
+    .search-bar::placeholder {
+      color: #888; /* 진회색 placeholder 텍스트 */
+    }
 
     .playlist-cover {
       width: 90%;
@@ -307,6 +311,11 @@
     .shareplay-desc {
       margin-bottom: 20px;
     }
+
+    /* 수정된 부분: 임의 재생 버튼 옆 아이콘 */
+    .shuffle-btn svg {
+      margin-left: 8px;
+    }
   </style>
 </head>
 <body>
@@ -316,8 +325,8 @@
     무제 플레이리스트
   </div>
 
-  <div class="search-bar">
-    <input type="text" placeholder="검색" />
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="검색" />
   </div>
 
   <div class="playlist-cover">
@@ -325,80 +334,73 @@
   </div>
 
   <div class="playlist-title">무제 플레이리스트</div>
-  <div class="playlist-updated">금요일에 업데이트됨</div>
+  <div class="playlist-updated">1주일 전 업데이트됨</div>
 
   <div class="controls">
-    <button class="play-btn">▶ 재생</button>
-    <button class="shuffle-btn">🔀 임의 재생</button>
+    <button class="play-btn">재생</button>
+    <button class="shuffle-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 4l5-5 5 5M6 14l5-5 5 5M1 10h3m8 0h3" />
+      </svg>
+    </button>
   </div>
 
   <ul class="music-list">
     <li class="music-item">
       <div class="music-cover"></div>
-      <div class="music-info">Music 1</div>
+      <div class="music-info">음악 제목 1</div>
     </li>
     <li class="music-item">
       <div class="music-cover"></div>
-      <div class="music-info">Music 2</div>
+      <div class="music-info">음악 제목 2</div>
     </li>
     <li class="music-item">
       <div class="music-cover"></div>
-      <div class="music-info">Music 3</div>
+      <div class="music-info">음악 제목 3</div>
     </li>
   </ul>
 
   <div class="now-playing-bar">
     <div class="now-playing-cover"></div>
-    <div class="now-playing-info">Nike Shoes (feat. Dynam...</div>
+    <div class="now-playing-info">음악 제목</div>
     <div class="now-playing-controls">
-      <img src="images/pause.svg" alt="Pause" />
+      <img src="images/prev.svg" alt="Prev" />
       <img src="images/play.svg" alt="Play" />
+      <img src="images/next.svg" alt="Next" />
     </div>
   </div>
 
-  <!-- SharePlay 팝업 -->
-  <div id="shareplay" class="shareplay-popup">
+  <div class="shareplay-popup">
     <div class="shareplay-header">
       <button id="close-shareplay">X</button>
-      <img src="images/SharePlay.jpg" alt="icon" />
-      <h2>신정환님과 연결하시겠습니까?</h2>
-      <p class="shareplay-desc">기기에서 Apple Music의<br/>재생 콘텐츠를 제어할 수 있습니다.</p>
+      <img src="images/avatar.jpg" alt="Profile" />
+      <h2>엄마와 공유 중</h2>
+      <p>영상이 공유되고 있습니다.</p>
     </div>
+
     <div class="shareplay-profile">
       <div class="left">
-        <div class="avatar">Me</div>
-        <div class="name">Me</div>
+        <div class="avatar">A</div>
+        <div class="name">엄마</div>
       </div>
       <div class="edit-btn">편집</div>
     </div>
-    <div class="sub-text">계정 설정에서 사용자의 이름 및 사진을 언제든지 편집할 수 있습니다.</div>
+
+    <div class="sub-text">영상 공유 중. 공유를 종료하려면 버튼을 클릭하세요.</div>
+
     <div class="shareplay-footer">
-      <button id="shareplay-btn">연결</button>
+      <button>공유 종료</button>
     </div>
   </div>
 
   <script>
-    const shareplayPopup = document.getElementById('shareplay');
-    const shareplayClose = document.getElementById('close-shareplay');
+    setTimeout(function() {
+      document.querySelector('.shareplay-popup').classList.add('show');
+    }, 1500);
 
-    // 로컬 스토리지 체크
-    if (!localStorage.getItem('shareplayDismissed')) {
-      setTimeout(() => {
-        shareplayPopup.classList.add('show');
-      }, 3500);
-    }
-
-    // 연결 버튼
-    document.getElementById('shareplay-btn').addEventListener('click', () => {
-      shareplayPopup.classList.remove('show');
-    });
-
-    // X 버튼
-    shareplayClose.addEventListener('click', () => {
-      shareplayPopup.classList.remove('show');
-      localStorage.setItem('shareplayDismissed', 'true'); // ✅ 다시 안 뜨게 저장
-      window.location.href = 'applemusic.html';
-    });
+    document.getElementById('close-shareplay').onclick = function() {
+      document.querySelector('.shareplay-popup').classList.remove('show');
+    };
   </script>
 </body>
 </html>
