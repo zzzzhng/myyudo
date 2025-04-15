@@ -174,9 +174,13 @@
       object-fit: cover;
       opacity: 0;
       animation: messageSend 0.3s ease forwards;
+      transition: transform 0.15s ease;
+    }
+    
+    .image-message:active {
+    transform: scale(0.96);
     }
 
-    }
   </style>
 </head>
 <body>
@@ -201,10 +205,16 @@
       wrapper.style.justifyContent = isUser ? 'flex-end' : 'flex-start';
 
       if (isImage) {
+        const link = document.createElement('a');
+        link.href = 'applemusic.html';
+
         const img = document.createElement('img');
         img.src = 'images/m2.png';
         img.className = 'image-message';
-        wrapper.appendChild(img);
+
+        link.appendChild(img);
+        wrapper.appendChild(link);
+
       } else {
         const msg = document.createElement('div');
         msg.className = 'message';
