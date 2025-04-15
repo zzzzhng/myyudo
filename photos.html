@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, user-scalable=no">
+  <title>Photos</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=SF+Pro+Display&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'SF Pro Display', sans-serif;
+      background-color: white;
+      width: 390px;
+      height: 844px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .navbar span {
+      margin-right: 10px;
+      color: #007AFF;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background-color: #e5e5e5;
+    }
+
+    .photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-color: #ddd;
+    }
+
+    .photo-count {
+      text-align: center;
+      font-size: 14px;
+      color: #444;
+      margin: 8px 0 100px;
+    }
+
+    .tab-bar {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 85px;
+      border-top: 1px solid #ddd;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 10px;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #8e8e93;
+    }
+
+    .tab-item.active {
+      color: #007AFF;
+    }
+
+    .tab-item svg {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+      fill: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <span>＜ 앨범</span>
+    <div class="title">최근 항목</div>
+  </div>
+
+  <div class="grid">
+    <!-- placeholder -->
+    <div class="photo"></div><div class="photo"></div><div class="photo"></div>
+    <div class="photo"></div><div class="photo"></div><div class="photo"></div>
+    <div class="photo"></div><div class="photo"></div><div class="photo"></div>
+  </div>
+
+  <div class="photo-count">6,962장의 사진, 40개의 비디오</div>
+
+  <div class="tab-bar">
+    <div class="tab-item">
+      <svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM5 5h14v14H5V5zm3 12l2.5-3.01L12 17l3.5-4.5L19 17H5z"/></svg>
+      <div>보관함</div>
+    </div>
+    <div class="tab-item">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
+      5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 
+      2.09C13.09 3.81 14.76 3 16.5 3 19.58 
+      3 22 5.42 22 8.5c0 3.78-3.4 
+      6.86-8.55 11.54L12 21.35z"/></svg>
+      <div>For You</div>
+    </div>
+    <div class="tab-item active">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16v2H4V4zm0 4h10v2H4V8zm0 4h16v2H4v-2zm0 4h10v2H4v-2z"/></svg>
+      <div>앨범</div>
+    </div>
+    <div class="tab-item">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 
+      6.471 0 0016 9.5 6.5 6.5 0 109.5 
+      16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 
+      4.99L20.49 19l-4.99-5zm-6 
+      0C8.01 14 6 11.99 6 9.5S8.01 
+      5 10.5 5 15 7.01 15 9.5 12.99 
+      14 10.5 14z"/></svg>
+      <div>검색</div>
+    </div>
+  </div>
+</body>
+</html>
