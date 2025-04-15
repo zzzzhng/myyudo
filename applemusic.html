@@ -36,7 +36,7 @@
     }
 
     .search-bar {
-      margin: 0 12px 16px; /* ✅ 양쪽 마진 통일 (navbar와 같게) */
+      margin: 14px 14px; /* ✅ 양쪽 마진 통일 (navbar와 같게) */
     }
 
     .search-bar input {
@@ -54,10 +54,10 @@
 
     .playlist-cover {
       width: 90%;
-      aspect-ratio: 1 / 1;  /* ✅ 정사각형 비율 */
+      aspect-ratio: 1 / 1;
       margin: 0 auto 12px;
-      border-radius: 20px;
-      overflow: hidden; /* ✅ 안쪽 비디오 모서리도 잘리게 */
+      border-radius: 20px; /* 모서리 필렛 */
+      overflow: hidden;
       background-color: #f1f1f1;
       display: flex;
       align-items: center;
@@ -67,15 +67,8 @@
     .playlist-cover video {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* ✅ 꽉 차게 */
+      object-fit: cover;
       display: block;
-    }
-      background-color: #f1f1f1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-size: 14px;
     }
 
     .playlist-title {
@@ -105,17 +98,17 @@
       border-radius: 12px;
       font-size: 16px;
       border: none;
-      color: white;
       font-weight: 500;
     }
 
     .play-btn {
-      background-color: #ff2d55;
+      background-color: #dcdcdc; /* 회색 배경 */
+      color: #ff2d55; /* 애플뮤직 UI 빨간색 글씨 */
     }
 
     .shuffle-btn {
       background-color: #dcdcdc;
-      color: #ff2d55;
+      color: #ff2d55; /* 빨간 글씨 */
     }
 
     .music-list {
@@ -251,7 +244,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #b0b0b0, #e0e0e0); /* 은은한 그라데이션 */
+      background: linear-gradient(135deg, #b0b0b0, #e0e0e0);
       color: white;
       font-weight: 600;
       display: flex;
@@ -274,13 +267,14 @@
       font-size: 12px;
       color: #888;
       text-align: center;
-      margin-top: 4px;
+      margin-top: 16px;
+      margin-bottom: 16px;  /* 아래쪽에 간격을 띄워서 문장과 연결 버튼이 구분되게 */
       padding: 0 16px;
     }
 
     .shareplay-footer {
       text-align: center;
-      padding: 0 16px 20px;
+      padding: 0 16px 5px;
     }
 
     .shareplay-footer button {
@@ -294,9 +288,9 @@
       width: 100%;
       cursor: pointer;
     }
-    
-  .shareplay-desc {
-      margin-bottom: 20px;  /* 적당히 여백 주기, 필요하면 24px~32px까지 조절 가능 */
+
+    .shareplay-desc {
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -351,9 +345,10 @@
   <!-- SharePlay 팝업 -->
   <div id="shareplay" class="shareplay-popup">
     <div class="shareplay-header">
+      <button id="close-shareplay" style="position: absolute; top: 10px; right: 10px; background: none; color: #007aff; border: none; font-size: 24px; cursor: pointer;">X</button>
       <img src="images/SharePlay.jpg" alt="icon" />
       <h2>신정환님과 연결하시겠습니까?</h2>
-      <p class="shareplay-desc"> 기기에서 Apple Music의<br/>재생 콘텐츠를 제어할 수 있습니다.</p>
+      <p class="shareplay-desc">기기에서 Apple Music의<br/>재생 콘텐츠를 제어할 수 있습니다.</p>
     </div>
     <div class="shareplay-profile">
       <div class="left">
@@ -364,18 +359,25 @@
     </div>
     <div class="sub-text">계정 설정에서 사용자의 이름 및 사진을 언제든지 편집할 수 있습니다.</div>
     <div class="shareplay-footer">
-      <button>연결</button>
+      <button id="shareplay-btn">연결</button>
     </div>
   </div>
 
-  <!-- 등장 애니메이션 스크립트 -->
   <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('shareplay').classList.add('show');
-      }, 3000);
-    });
-  </script>
+    // 팝업 3.5초 후 보여지게
+    setTimeout(() => {
+      document.getElementById('shareplay').classList.add('show');
+    }, 3500);
 
+    // X 버튼 클릭 시 팝업 닫기
+    document.getElementById('shareplay-btn').addEventListener('click', function () {
+      document.getElementById('shareplay').classList.remove('show');
+    });
+    document.getElementById('close-shareplay').addEventListener('click', function () {
+      document.getElementById('shareplay').classList.remove('show');
+      window.location.href = 'applemusic.html';  // Apple Music 페이지로 돌아가기 (파일명에 맞게 수정)
+    });
+
+  </script>
 </body>
 </html>
