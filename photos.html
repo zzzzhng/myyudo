@@ -11,17 +11,26 @@
       font-family: 'SF Pro Display', sans-serif;
       background-color: white;
       width: 390px;
-      height: 844px;
+      height: 810px;
       overflow: hidden;
       position: relative;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 12px 12px 28px 12px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0));
+      z-index: 10;
     }
 
     .navbar {
       display: flex;
       align-items: center;
-      padding: 12px;
       font-size: 17px;
       font-weight: 500;
+      color: black;
     }
 
     .navbar span {
@@ -40,6 +49,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background-color: #e5e5e5;
+      margin-top: 70px;
     }
 
     .photo {
@@ -51,8 +61,9 @@
     .photo-count {
       text-align: center;
       font-size: 14px;
-      color: #444;
-      margin: 8px 0 100px;
+      color: #000;
+      font-weight: 600;
+      margin: 10px 0 90px;
     }
 
     .tab-bar {
@@ -88,20 +99,25 @@
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <span>＜ 앨범</span>
-    <div class="title">최근 항목</div>
+  <!-- 상단 오버레이 바 -->
+  <div class="header-overlay">
+    <div class="navbar">
+      <span>＜ 앨범</span>
+      <div class="title">최근 항목</div>
+    </div>
   </div>
 
+  <!-- 사진 격자 -->
   <div class="grid">
-    <!-- placeholder -->
     <div class="photo"></div><div class="photo"></div><div class="photo"></div>
     <div class="photo"></div><div class="photo"></div><div class="photo"></div>
     <div class="photo"></div><div class="photo"></div><div class="photo"></div>
   </div>
 
+  <!-- 사진 개수 -->
   <div class="photo-count">6,962장의 사진, 40개의 비디오</div>
 
+  <!-- 하단 탭바 -->
   <div class="tab-bar">
     <div class="tab-item">
       <svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM5 5h14v14H5V5zm3 12l2.5-3.01L12 17l3.5-4.5L19 17H5z"/></svg>
