@@ -11,15 +11,14 @@
       font-family: 'SF Pro Display', sans-serif;
       background-color: white;
       width: 390px;
-      height: 810px;
+      height: 800px; /* 줄임 */
       overflow: hidden;
       position: relative;
     }
 
     .navbar {
-      position: relative;
       z-index: 1;
-      padding: 20px 12px 10px;
+      padding: 20px 12px 6px;
       background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
       color: white;
       font-size: 17px;
@@ -41,20 +40,20 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
       background-color: #e5e5e5;
-      height: 550px; /* 고정 화면 맞춤용 줄임 */
     }
 
     .photo {
       width: 100%;
       aspect-ratio: 1 / 1;
-      background-color: #ddd;
+      object-fit: cover;
+      display: block;
     }
 
     .photo-count {
       text-align: center;
       font-size: 15px;
       color: #444;
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       font-weight: 500;
     }
 
@@ -97,9 +96,18 @@
   </div>
 
   <div class="grid">
-    <!-- placeholder 이미지 6개로 줄임 (1화면에 맞게) -->
-    <div class="photo"></div><div class="photo"></div><div class="photo"></div>
-    <div class="photo"></div><div class="photo"></div><div class="photo"></div>
+    <img src="pimages/p1.jpg" class="photo">
+    <img src="pimages/p2.jpg" class="photo">
+    <img src="pimages/p3.jpg" class="photo">
+    <img src="pimages/p4.jpg" class="photo">
+    <img src="pimages/p5.jpg" class="photo">
+    <img src="pimages/p6.jpg" class="photo">
+    <img src="pimages/p7.jpg" class="photo">
+    <img src="pimages/p8.jpg" class="photo">
+    <img src="pimages/p9.jpg" class="photo">
+    <img src="pimages/p10.jpg" class="photo">
+    <img src="pimages/p11.jpg" class="photo">
+    <img src="pimages/p12.jpg" class="photo">
   </div>
 
   <div class="photo-count">6,963장의 사진, 40개의 비디오</div>
