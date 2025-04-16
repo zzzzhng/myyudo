@@ -132,7 +132,6 @@
       display: none;
     }
 
-    /* Typing indicator */
     .typing {
       width: 50px;
       height: 24px;
@@ -168,17 +167,18 @@
       }
     }
 
-      .image-message {
+    .image-message {
       width: 200px;
       border-radius: 18px;
       object-fit: cover;
       opacity: 0;
       animation: messageSend 0.3s ease forwards;
       transition: transform 0.15s ease;
+      cursor: pointer;
     }
-    
+
     .image-message:active {
-    transform: scale(0.96);
+      transform: scale(0.96);
     }
 
   </style>
@@ -205,16 +205,16 @@
       wrapper.style.justifyContent = isUser ? 'flex-end' : 'flex-start';
 
       if (isImage) {
-        const link = document.createElement('a');
-        link.href = 'applemusic.html';
-
         const img = document.createElement('img');
         img.src = 'images/m2.png';
         img.className = 'image-message';
 
-        link.appendChild(img);
-        wrapper.appendChild(link);
+        img.onclick = (e) => {
+          e.preventDefault();
+          triggerEmojiExplosionAndRedirect();
+        };
 
+        wrapper.appendChild(img);
       } else {
         const msg = document.createElement('div');
         msg.className = 'message';
@@ -253,6 +253,44 @@
       if (!text) return;
       appendMessage(text, true);
       input.value = '';
+    }
+
+    function triggerEmojiExplosionAndRedirect() {
+      const emojis = ['😍', '😎', '🥰', '🩷', '❤️'];
+      const explosionContainer = document.createElement('div');
+      explosionContainer.style.position = 'fixed';
+      explosionContainer.style.top = '0';
+      explosionContainer.style.left = '0';
+      explosionContainer.style.width = '100%';
+      explosionContainer.style.height = '100%';
+      explosionContainer.style.pointerEvents = 'none';
+      explosionContainer.style.zIndex = '9999';
+      document.body.appendChild(explosionContainer);
+
+      for (let i = 0; i < 30; i++) {
+        const emoji = document.createElement('div');
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.position = 'absolute';
+        emoji.style.left = '50%';
+        emoji.style.top = '50%';
+        emoji.style.fontSize = '24px';
+        emoji.style.opacity = '1';
+        emoji.style.transition = 'transform 0.8s ease-out, opacity 0.8s ease-out';
+
+        const x = (Math.random() - 0.5) * 300;
+        const y = (Math.random() - 0.5) * 400;
+
+        setTimeout(() => {
+          emoji.style.transform = `translate(${x}px, ${y}px) scale(1.5)`;
+          emoji.style.opacity = '0';
+        }, 10);
+
+        explosionContainer.appendChild(emoji);
+      }
+
+      setTimeout(() => {
+        window.location.href = 'photos.html';
+      }, 900);
     }
 
     window.onload = () => {
