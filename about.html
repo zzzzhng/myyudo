@@ -167,19 +167,20 @@
       }
     }
 
-    .image-message {
-      width: 200px;
-      border-radius: 18px;
-      object-fit: cover;
-      opacity: 0;
-      animation: messageSend 0.3s ease forwards;
-      transition: transform 0.15s ease;
-      cursor: pointer;
-    }
+  .image-message {
+    width: 200px;
+    border-radius: 18px;
+    object-fit: cover;
+    opacity: 0;
+    animation: messageSend 0.3s ease forwards;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    cursor: pointer;
+  }
 
-    .image-message:active {
-      transform: scale(0.92);
-    }
+  .image-message:active {
+    transform: scale(0.92);
+    filter: brightness(85%);
+  }
 
     /* Emoji Explosion Animation */
     @keyframes emojiExplosion {
