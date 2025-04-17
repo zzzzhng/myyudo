@@ -224,8 +224,7 @@
 
     .emoji-popup {
       display: flex;
-      top: 10px;
-      right: -10;
+      position: absolute; /* 추가 */
       background: white;
       padding: 12px 16px;
       border-radius: 24px;
@@ -273,15 +272,19 @@
 
       img.onclick = (e) => {
         e.preventDefault();
-        img.classList.add('zoom-out');
-        showEmojiPopup(img);  // 이미지 객체를 전달
+        img.style.transition = 'transform 0.2s ease';
+        img.style.transform = 'scale(2.05)';
+        showEmojiPopup(img);
+};
     };
 
 // showEmojiPopup 함수 수정
 function showEmojiPopup(img) {
   const overlay = document.createElement('div');
   overlay.className = 'overlay';
-
+  overlay.style.backdropFilter = 'blur(30px)';
+  overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+  
   const popup = document.createElement('div');
   popup.className = 'emoji-popup';
 
@@ -300,8 +303,9 @@ function showEmojiPopup(img) {
 
   // 이미지의 오른쪽 상단에 이모티콘 팝업을 배치
   const imgRect = img.getBoundingClientRect();
-  popup.style.top = `${imgRect.top}px`;
-  popup.style.left = `${imgRect.right + 10}px`;
+  popup.style.position = 'absolute';
+  popup.style.top = `${imgRect.top - 40}px`;       // 이미지보다 약간 위
+  popup.style.left = `${imgRect.right - 80}px`;    // 이미지 오른쪽 상단
 
   overlay.appendChild(popup);
   document.body.appendChild(overlay);
