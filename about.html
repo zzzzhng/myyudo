@@ -199,6 +199,12 @@
     transition: transform 0.1s ease-out;
     }
 
+  .zoom-out {
+  transform: scale(1.05);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
   </style>
 </head>
 <body>
@@ -227,13 +233,14 @@
         img.src = 'images/m2.png';
         img.className = 'image-message';
 
-        img.onclick = (e) => {
-          e.preventDefault();
-          img.style.transform = 'scale(0.9)';
-          setTimeout(() => {
-            triggerEmojiExplosionAndRedirect();
-          }, 100);
-        };
+      img.onclick = (e) => {
+        e.preventDefault();
+        img.classList.add('zoom-out');
+        setTimeout(() => {
+        window.location.href = 'photos.html';
+        }, 400); // 0.4초 후 이동
+      };
+
 
         wrapper.appendChild(img);
       } else {
