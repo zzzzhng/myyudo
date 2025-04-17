@@ -275,6 +275,7 @@
         img.classList.add('image-zoomed');
         showEmojiPopup(img);
 };
+        wrapper.appendChild(img); // ❗이게 빠져 있었음!
     };
 
 // showEmojiPopup 함수 수정
@@ -351,9 +352,6 @@ function showEmojiPopup(img) {
       input.value = '';
     }
 
-    function showEmojiPopup() {
-      const overlay = document.createElement('div');
-      overlay.className = 'overlay';
 
       const popup = document.createElement('div');
       popup.className = 'emoji-popup';
