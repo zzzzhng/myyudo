@@ -214,14 +214,14 @@
       left: 0;
       width: 390px;
       height: 844px;
-      backdrop-filter: blur(30px);
-      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(25px);
+      background-color: rgba(255, 255, 255, 0.6);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
-    
+
     .emoji-popup {
       display: flex;
       background: white;
@@ -272,7 +272,7 @@
         img.onclick = (e) => {
           e.preventDefault();
           img.classList.add('zoom-out');
-          showEmojiPopup(img);
+          showEmojiPopup();
         };
 
         wrapper.appendChild(img);
@@ -320,25 +320,8 @@
       const overlay = document.createElement('div');
       overlay.className = 'overlay';
 
-       // 👉 원본 이미지 복사해서 overlay 위에 다시 표시
-  const imgClone = originalImage.cloneNode();
-  imgClone.style.position = 'absolute';
-  const rect = originalImage.getBoundingClientRect();
-  imgClone.style.top = rect.top + 'px';
-  imgClone.style.left = rect.left + 'px';
-  imgClone.style.width = rect.width + 'px';
-  imgClone.style.height = rect.height + 'px';
-  imgClone.style.zIndex = '1001';
-  imgClone.style.objectFit = 'cover';
-  imgClone.style.borderRadius = '18px';
-
       const popup = document.createElement('div');
       popup.className = 'emoji-popup';
-      popup.style.position = 'absolute';
-      popup.style.top = rect.top - 60 + 'px';
-      popup.style.left = rect.left + rect.width / 2 + 'px';
-      popup.style.transform = 'translateX(-50%)';
-      popup.style.pointerEvents = 'auto';
       
       popup.style.position = 'absolute'; // 또는 fixed, overlay 스타일에 따라
       popup.style.top = '120px'; // 원하는 y축 위치
@@ -352,7 +335,6 @@
         if (emoji === '❤️') {
           e.onclick = () => {
             document.body.removeChild(overlay);
-            document.body.removeChild(imgClone);
             triggerEmojiExplosionAndRedirect();
           };
         }
@@ -361,7 +343,6 @@
 
       overlay.appendChild(popup);
       document.body.appendChild(overlay);
-      document.body.appendChild(imgClone);
     }
 
     function triggerEmojiExplosionAndRedirect() {
@@ -383,9 +364,9 @@
         emoji.style.left = '50%';
         emoji.style.top = '50%';
         emoji.style.fontSize = '28px';
-        emoji.style.setProperty('--x', `${Math.random() * 400 - 200}px`);
-        emoji.style.setProperty('--y', `${Math.random() * 400 - 200}px`);
-        emoji.style.animation = `emojiExplosion 1s forwards`;
+        emoji.style.setProperty('--x', ${Math.random() * 400 - 200}px);
+        emoji.style.setProperty('--y', ${Math.random() * 400 - 200}px);
+        emoji.style.animation = emojiExplosion 1s forwards;
         explosionContainer.appendChild(emoji);
       }
 
