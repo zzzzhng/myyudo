@@ -202,9 +202,9 @@
     }
 
     .zoom-out {
-      transform: scale(1.05);
-      opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transform: scale(2.05);
+      transition: transform 0.3s ease;
+      z-index: 10; /* 팝업보다 낮게 */
     }
 
     /* 새로 추가: 오버레이 + 이모티콘 UI */
@@ -272,8 +272,7 @@
 
       img.onclick = (e) => {
         e.preventDefault();
-        img.style.transition = 'transform 0.2s ease';
-        img.style.transform = 'scale(2.05)';
+        img.classList.add('image-zoomed');
         showEmojiPopup(img);
 };
     };
