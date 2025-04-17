@@ -45,6 +45,8 @@
       gap: 1px;
       background-color: #e5e5e5;
       margin-top: -10px;
+      height: 520px; /* 사진 영역 제한 */
+      overflow: hidden;
     }
 
     .photo {
@@ -54,13 +56,17 @@
       display: block;
     }
 
-    .photo-count {
-      text-align: center;
-      font-size: 15px;
-      color: #444;
-      margin: 4px 0;
-      font-weight: 500;
-    }
+  .photo-count {
+    text-align: center;
+    font-size: 15px;
+    color: #444;
+    margin: 4px 0;
+    font-weight: 500;
+    position: absolute;
+    bottom: 80px; /* 탭바 위에 띄움 */
+    width: 100%;
+  }
+
 
     .tab-bar {
       position: absolute;
@@ -110,6 +116,11 @@
     <img src="pimages/p7.jpg" class="photo">
     <img src="pimages/p8.jpg" class="photo">
     <img src="pimages/p9.jpg" class="photo">
+    <img src="pimages/p9.jpg" class="photo">
+    <img src="pimages/p10.jpg" class="photo">
+    <img src="pimages/p11.jpg" class="photo">
+    <img src="pimages/p12.jpg" class="photo">
+
   </div>
 
   <div class="photo-count">6,963장의 사진, 40개의 비디오</div>
