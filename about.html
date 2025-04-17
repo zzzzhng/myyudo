@@ -272,7 +272,7 @@
         img.onclick = (e) => {
           e.preventDefault();
           img.classList.add('zoom-out');
-          showEmojiPopup();
+          showEmojiPopup(img);
         };
 
         wrapper.appendChild(img);
@@ -334,6 +334,11 @@
 
       const popup = document.createElement('div');
       popup.className = 'emoji-popup';
+      popup.style.position = 'absolute';
+      popup.style.top = rect.top - 60 + 'px';
+      popup.style.left = rect.left + rect.width / 2 + 'px';
+      popup.style.transform = 'translateX(-50%)';
+      popup.style.pointerEvents = 'auto';
       
       popup.style.position = 'absolute'; // 또는 fixed, overlay 스타일에 따라
       popup.style.top = '120px'; // 원하는 y축 위치
@@ -347,6 +352,7 @@
         if (emoji === '❤️') {
           e.onclick = () => {
             document.body.removeChild(overlay);
+            document.body.removeChild(imgClone);
             triggerEmojiExplosionAndRedirect();
           };
         }
@@ -355,6 +361,7 @@
 
       overlay.appendChild(popup);
       document.body.appendChild(overlay);
+      document.body.appendChild(imgClone);
     }
 
     function triggerEmojiExplosionAndRedirect() {
