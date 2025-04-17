@@ -167,6 +167,20 @@
         transform: scale(1);
         opacity: 1;
       }
+        
+    .image-message {
+      width: 200px;
+      border-radius: 18px;
+      object-fit: cover;
+      opacity: 0;
+      animation: messageSend 0.3s ease forwards;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      cursor: pointer;
+    }
+
+    .image-message:active {
+      transform: scale(5);
+      filter: none;
     }
 
     @keyframes emojiExplosion {
@@ -206,21 +220,6 @@
       align-items: center;
       z-index: 1000;
       
-    }
-    
-    .image-message {
-      width: 200px;
-      border-radius: 18px;
-      object-fit: cover;
-      opacity: 0;
-      animation: messageSend 0.3s ease forwards;
-      transition: transform 0.15s ease, filter 0.15s ease;
-      cursor: pointer;
-    }
-
-    .image-message:active {
-      transform: scale(5);
-      filter: none;
     }
 
     .emoji-popup {
