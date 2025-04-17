@@ -344,8 +344,8 @@
 
       const rect = img.getBoundingClientRect();
       popup.style.position = 'absolute';
-      popup.style.left = `${rect.left + rect.width / 2}px`; // 가운데 정렬
-      popup.style.top = `${rect.top}px`; // 이미지 상단 기준
+      popup.style.left = `${rect.left + rect.width / 2 + 20}px`; // 가운데 정렬
+      popup.style.top = `${rect.top - 40}px`; // 이미지 상단 기준
       popup.style.transform = 'translate(-50%, -100%)'; // 상단에 뜨게
       
     }
