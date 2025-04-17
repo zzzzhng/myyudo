@@ -221,7 +221,23 @@
       align-items: center;
       z-index: 1000;
     }
+    
+.overlay-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(30px);
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 0;
+  pointer-events: none;
+}
 
+.emoji-popup2 {
+  z-index: 1;
+  pointer-events: auto;
+}
     .emoji-popup {
       display: flex;
       background: white;
@@ -319,13 +335,17 @@
     function showEmojiPopup() {
       const overlay = document.createElement('div');
       overlay.className = 'overlay';
+      
+      const blurBg = document.createElement('div');
+      blurBg.className = 'overlay-blur';
+      overlay.appendChild(blurBg);
 
       const popup = document.createElement('div');
       popup.className = 'emoji-popup';
       
       popup.style.position = 'absolute'; // 또는 fixed, overlay 스타일에 따라
-      popup.style.top = '110px'; // 원하는 y축 위치
-      popup.style.left = '60%'; // 가운데 정렬하려면
+      popup.style.top = '120px'; // 원하는 y축 위치
+      popup.style.left = '55%'; // 가운데 정렬하려면
       popup.style.transform = 'translateX(-50%)'; // x축 중앙 정렬 보정
 
       const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
