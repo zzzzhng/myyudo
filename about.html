@@ -180,9 +180,38 @@
     }
 
     .image-message:active {
-      transform: scale(0.92);
+      transform: scale(1.05);
       filter: brightness(85%);
     }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 390px;
+    height: 844px;
+    backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.5); /* 배경을 더욱 흐리게 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+.emoji-popup {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: translateX(10px) translateY(10px); /* 오른쪽 상단 위치 */
+  display: flex;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  gap: 12px;
+  font-size: 24px;
+  cursor: pointer;
+}
 
     @keyframes emojiExplosion {
       0% {
@@ -269,11 +298,41 @@
         img.src = 'images/m2.png';
         img.className = 'image-message';
 
-        img.onclick = (e) => {
-          e.preventDefault();
-          img.classList.add('zoom-out');
-          showEmojiPopup();
-        };
+      img.onclick = (e) => {
+        e.preventDefault();
+        img.classList.add('zoom-out');
+        showEmojiPopup(img);  // 이미지 객체를 전달
+    };
+
+// showEmojiPopup 함수 수정
+function showEmojiPopup(img) {
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+
+  const popup = document.createElement('div');
+  popup.className = 'emoji-popup';
+
+  const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
+  emojis.forEach((emoji) => {
+    const e = document.createElement('div');
+    e.textContent = emoji;
+    if (emoji === '❤️') {
+      e.onclick = () => {
+        document.body.removeChild(overlay);
+        triggerEmojiExplosionAndRedirect();
+      };
+    }
+    popup.appendChild(e);
+  });
+
+  // 이미지의 오른쪽 상단에 이모티콘 팝업을 배치
+  const imgRect = img.getBoundingClientRect();
+  popup.style.top = `${imgRect.top}px`;
+  popup.style.left = `${imgRect.right + 10}px`;
+
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
+}
 
         wrapper.appendChild(img);
       } else {
