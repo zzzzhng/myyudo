@@ -56,16 +56,16 @@
       display: block;
     }
 
-  .photo-count {
-    text-align: center;
-    font-size: 15px;
-    color: #444;
-    margin: 4px 0;
-    font-weight: 500;
-    position: absolute;
-    bottom: 80px; /* 탭바 위에 띄움 */
-    width: 100%;
-  }
+    .photo-count {
+      text-align: center;
+      font-size: 15px;
+      color: #444;
+      margin: 4px 0;
+      font-weight: 500;
+      position: absolute;
+      bottom: 80px; /* 탭바 위에 띄움 */
+      width: 100%;
+    }
 
     .tab-bar {
       position: absolute;
@@ -85,6 +85,8 @@
       flex-direction: column;
       align-items: center;
       color: #8e8e93;
+      position: relative;
+      cursor: pointer;
     }
 
     .tab-item.active {
@@ -96,6 +98,31 @@
       height: 24px;
       margin-bottom: 4px;
       fill: currentColor;
+    }
+
+    /* 하트 이모티콘 애니메이션 */
+    .tab-item.heart {
+      position: relative;
+      animation: floatingHeart 2s ease-in-out infinite;
+    }
+
+    .tab-item.heart.active svg {
+      fill: red;
+    }
+
+    @keyframes floatingHeart {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 0.5;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -118,7 +145,6 @@
     <img src="pimages/p10.jpg" class="photo">
     <img src="pimages/p11.jpg" class="photo">
     <img src="pimages/p12.jpg" class="photo">
-
   </div>
 
   <div class="photo-count">1,107장의 사진, 23개의 비디오</div>
@@ -129,25 +155,15 @@
       <div>보관함</div>
     </div>
     <div class="tab-item">
-      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
-      5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 
-      2.09C13.09 3.81 14.76 3 16.5 3 19.58 
-      3 22 5.42 22 8.5c0 3.78-3.4 
-      6.86-8.55 11.54L12 21.35z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
       <div>For You</div>
     </div>
-    <div class="tab-item active">
+    <div class="tab-item active heart" onclick="window.location.href='applemusic.html'">
       <svg viewBox="0 0 24 24"><path d="M4 4h16v2H4V4zm0 4h10v2H4V8zm0 4h16v2H4v-2zm0 4h10v2H4v-2z"/></svg>
       <div>앨범</div>
     </div>
     <div class="tab-item">
-      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 
-      6.471 0 0016 9.5 6.5 6.5 0 109.5 
-      16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 
-      4.99L20.49 19l-4.99-5zm-6 
-      0C8.01 14 6 11.99 6 9.5S8.01 
-      5 10.5 5 15 7.01 15 9.5 12.99 
-      14 10.5 14z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z"/></svg>
       <div>검색</div>
     </div>
   </div>
