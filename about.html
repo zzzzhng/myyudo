@@ -214,8 +214,8 @@
       left: 0;
       width: 390px;
       height: 844px;
-      backdrop-filter: blur(25px);
-      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -323,10 +323,11 @@
       const popup = document.createElement('div');
       popup.className = 'emoji-popup';
       
-      popup.style.position = 'absolute'; // 또는 fixed, overlay 스타일에 따라
-      popup.style.top = '120px'; // 원하는 y축 위치
-      popup.style.left = '55%'; // 가운데 정렬하려면
-      popup.style.transform = 'translateX(-50%)'; // x축 중앙 정렬 보정
+  // ✅ 여기에 위치 설정 추가
+  popup.style.position = 'absolute'; // 또는 fixed, overlay 스타일에 따라
+  popup.style.top = '120px'; // 원하는 y축 위치
+  popup.style.left = '55%'; // 가운데 정렬하려면
+  popup.style.transform = 'translateX(-50%)'; // x축 중앙 정렬 보정
 
       const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
       emojis.forEach((emoji) => {
@@ -364,9 +365,9 @@
         emoji.style.left = '50%';
         emoji.style.top = '50%';
         emoji.style.fontSize = '28px';
-        emoji.style.setProperty('--x', ${Math.random() * 400 - 200}px);
-        emoji.style.setProperty('--y', ${Math.random() * 400 - 200}px);
-        emoji.style.animation = emojiExplosion 1s forwards;
+        emoji.style.setProperty('--x', `${Math.random() * 400 - 200}px`);
+        emoji.style.setProperty('--y', `${Math.random() * 400 - 200}px`);
+        emoji.style.animation = `emojiExplosion 1s forwards`;
         explosionContainer.appendChild(emoji);
       }
 
