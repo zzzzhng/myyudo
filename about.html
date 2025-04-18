@@ -270,9 +270,8 @@
         img.className = 'image-message';
 
         img.onclick = (e) => {
-          e.preventDefault();
-          img.classList.add('zoom-out');
-          showEmojiPopup();
+  e.preventDefault();
+  showImagePopup(img.src); // ✅ 확대 + 배경 블러 처리 함수 호출
         };
 
         wrapper.appendChild(img);
@@ -347,16 +346,49 @@
     }
 
     function triggerEmojiExplosionAndRedirect() {
-      const emojis = ['😍', '😎', '🥰', '💕', '❤️'];
-      const explosionContainer = document.createElement('div');
-      explosionContainer.style.position = 'fixed';
-      explosionContainer.style.top = '0';
-      explosionContainer.style.left = '0';
-      explosionContainer.style.width = '100%';
-      explosionContainer.style.height = '100%';
-      explosionContainer.style.pointerEvents = 'none';
-      explosionContainer.style.zIndex = '9999';
-      document.body.appendChild(explosionContainer);
+      function showImagePopup(src) {
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+
+  const imageBubble = document.createElement('img');
+  imageBubble.src = src;
+  imageBubble.style.width = '220px';
+  imageBubble.style.borderRadius = '20px';
+  imageBubble.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+  imageBubble.style.zIndex = '1001';
+  imageBubble.style.position = 'relative';
+  imageBubble.style.transition = 'transform 0.3s ease';
+  imageBubble.style.transform = 'scale(1.05)';
+
+  const popup = document.createElement('div');
+  popup.className = 'emoji-popup';
+  popup.style.position = 'absolute';
+  popup.style.top = '0';
+  popup.style.left = '50%';
+  popup.style.transform = 'translate(-50%, -160%)';
+
+  const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
+  emojis.forEach((emoji) => {
+    const e = document.createElement('div');
+    e.textContent = emoji;
+    if (emoji === '❤️') {
+      e.onclick = () => {
+        document.body.removeChild(overlay);
+        triggerEmojiExplosionAndRedirect();
+      };
+    } else {
+      e.onclick = () => {
+        document.body.removeChild(overlay);
+      };
+    }
+    popup.appendChild(e);
+  });
+
+  overlay.appendChild(imageBubble);
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
+}
+
 
       for (let i = 0; i < 80; i++) {
         const emoji = document.createElement('div');
