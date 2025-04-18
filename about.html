@@ -345,8 +345,7 @@
       document.body.appendChild(overlay);
     }
 
-    function triggerEmojiExplosionAndRedirect() {
-      function showImagePopup(src) {
+function showImagePopup(src) {
   const overlay = document.createElement('div');
   overlay.className = 'overlay';
 
@@ -388,7 +387,18 @@
   overlay.appendChild(popup);
   document.body.appendChild(overlay);
 }
-
+    
+function triggerEmojiExplosionAndRedirect() {
+  const emojis = ['😍', '😎', '🥰', '💕', '❤️'];
+  const explosionContainer = document.createElement('div');
+  explosionContainer.style.position = 'fixed';
+  explosionContainer.style.top = '0';
+  explosionContainer.style.left = '0';
+  explosionContainer.style.width = '100%';
+  explosionContainer.style.height = '100%';
+  explosionContainer.style.pointerEvents = 'none';
+  explosionContainer.style.zIndex = '9999';
+  document.body.appendChild(explosionContainer);
 
       for (let i = 0; i < 80; i++) {
         const emoji = document.createElement('div');
