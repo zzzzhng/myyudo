@@ -179,10 +179,14 @@
       cursor: pointer;
     }
 
-    .image-message:active {
-      transform: scale(0.92);
-      filter: brightness(85%);
-    }
+.image-message.active {
+  transform: scale(1.05);
+  z-index: 1001;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
 
     @keyframes emojiExplosion {
       0% {
@@ -271,8 +275,48 @@
 
         img.onclick = (e) => {
   e.preventDefault();
-  showImagePopup(img.src); // ✅ 확대 + 배경 블러 처리 함수 호출
-        };
+
+  // 이전 active 제거
+  document.querySelectorAll('.image-message.active').forEach(el => {
+    el.classList.remove('active');
+    const oldPopup = el.parentNode.querySelector('.emoji-popup');
+    if (oldPopup) oldPopup.remove();
+  });
+
+  // 현재 이미지에 확대 효과
+  img.classList.add('active');
+  img.parentNode.style.position = 'relative'; // popup 위치 기준
+
+  // 이모지 팝업 생성
+  const popup = document.createElement('div');
+  popup.className = 'emoji-popup';
+  popup.style.position = 'absolute';
+  popup.style.top = '-48px';
+  popup.style.left = '50%';
+  popup.style.transform = 'translateX(-50%)';
+  popup.style.zIndex = '1002';
+
+  const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
+  emojis.forEach((emoji) => {
+    const e = document.createElement('div');
+    e.textContent = emoji;
+    if (emoji === '❤️') {
+      e.onclick = () => {
+        img.classList.remove('active');
+        popup.remove();
+        triggerEmojiExplosionAndRedirect();
+      };
+    } else {
+      e.onclick = () => {
+        img.classList.remove('active');
+        popup.remove();
+      };
+    }
+    popup.appendChild(e);
+  });
+
+  img.parentNode.appendChild(popup);
+};
 
         wrapper.appendChild(img);
       } else {
@@ -313,81 +357,7 @@
       if (!text) return;
       appendMessage(text, true);
       input.value = '';
-    }
 
-    function showEmojiPopup() {
-      const overlay = document.createElement('div');
-      overlay.className = 'overlay';
-
-      const popup = document.createElement('div');
-      popup.className = 'emoji-popup';
-      
-  // ✅ 여기에 위치 설정 추가
-  popup.style.position = 'absolute'; // 또는 fixed, overlay 스타일에 따라
-  popup.style.top = '120px'; // 원하는 y축 위치
-  popup.style.left = '55%'; // 가운데 정렬하려면
-  popup.style.transform = 'translateX(-50%)'; // x축 중앙 정렬 보정
-
-      const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
-      emojis.forEach((emoji) => {
-        const e = document.createElement('div');
-        e.textContent = emoji;
-        if (emoji === '❤️') {
-          e.onclick = () => {
-            document.body.removeChild(overlay);
-            triggerEmojiExplosionAndRedirect();
-          };
-        }
-        popup.appendChild(e);
-      });
-
-      overlay.appendChild(popup);
-      document.body.appendChild(overlay);
-    }
-
-function showImagePopup(src) {
-  const overlay = document.createElement('div');
-  overlay.className = 'overlay';
-
-  const imageBubble = document.createElement('img');
-  imageBubble.src = src;
-  imageBubble.style.width = '220px';
-  imageBubble.style.borderRadius = '20px';
-  imageBubble.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
-  imageBubble.style.zIndex = '1001';
-  imageBubble.style.position = 'relative';
-  imageBubble.style.transition = 'transform 0.3s ease';
-  imageBubble.style.transform = 'scale(1.05)';
-
-  const popup = document.createElement('div');
-  popup.className = 'emoji-popup';
-  popup.style.position = 'absolute';
-  popup.style.top = '0';
-  popup.style.left = '50%';
-  popup.style.transform = 'translate(-50%, -160%)';
-
-  const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
-  emojis.forEach((emoji) => {
-    const e = document.createElement('div');
-    e.textContent = emoji;
-    if (emoji === '❤️') {
-      e.onclick = () => {
-        document.body.removeChild(overlay);
-        triggerEmojiExplosionAndRedirect();
-      };
-    } else {
-      e.onclick = () => {
-        document.body.removeChild(overlay);
-      };
-    }
-    popup.appendChild(e);
-  });
-
-  overlay.appendChild(imageBubble);
-  overlay.appendChild(popup);
-  document.body.appendChild(overlay);
-}
-    
 function triggerEmojiExplosionAndRedirect() {
   const emojis = ['😍', '😎', '🥰', '💕', '❤️'];
   const explosionContainer = document.createElement('div');
