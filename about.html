@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=390, user-scalable=no" />
   <title>iMessage</title>
   <style>
-    /* 기존 스타일 유지 */
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -130,10 +128,6 @@
       user-select: none;
     }
 
-    .messages::-webkit-scrollbar {
-      display: none;
-    }
-
     .typing {
       width: 50px;
       height: 24px;
@@ -150,23 +144,12 @@
       animation: blink 1.4s infinite ease-in-out both;
     }
 
-    .dot:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .dot:nth-child(3) {
-      animation-delay: 0.4s;
-    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes blink {
-      0%, 80%, 100% {
-        transform: scale(0.8);
-        opacity: 0.3;
-      }
-      40% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.3; }
+      40% { transform: scale(1); opacity: 1; }
     }
 
     .image-message {
@@ -175,55 +158,8 @@
       object-fit: cover;
       opacity: 0;
       animation: messageSend 0.3s ease forwards;
-      transition: transform 0.15s ease, filter 0.15s ease;
+      transition: transform 0.3s ease;
       cursor: pointer;
-    }
-
-.image-message.active {
-  transform: scale(1.05);
-  z-index: 1001;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
-  position: relative;
-}
-
-
-    @keyframes emojiExplosion {
-      0% {
-        transform: scale(1) translate(0, 0);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(2) translate(var(--x), var(--y));
-        opacity: 0;
-      }
-    }
-
-    .icon:active,
-    .send-button:active {
-      transform: scale(0.92);
-      transition: transform 0.1s ease-out;
-    }
-
-    .zoom-out {
-      transform: scale(1.05);
-      opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-    }
-
-    /* 새로 추가: 오버레이 + 이모티콘 UI */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 390px;
-      height: 844px;
-      backdrop-filter: blur(12px);
-      background-color: rgba(255, 255, 255, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
     }
 
     .emoji-popup {
@@ -235,14 +171,25 @@
       gap: 12px;
       font-size: 24px;
       cursor: pointer;
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1001;
     }
 
-    .emoji-popup div {
-      transition: transform 0.2s ease;
-    }
+    .emoji-popup div { transition: transform 0.2s ease; }
+    .emoji-popup div:active { transform: scale(1.3); }
 
-    .emoji-popup div:active {
-      transform: scale(1.3);
+    .blur-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 390px;
+      height: 844px;
+      backdrop-filter: blur(15px);
+      background-color: rgba(255, 255, 255, 0.3);
+      z-index: 1000;
     }
 
   </style>
@@ -252,10 +199,8 @@
     <div class="messages" id="messages"></div>
 
     <div class="input-area">
-      <div class="input-icons">
-        <div class="icon">+</div>
-      </div>
-      <input type="text" id="messageInput" placeholder="iMessage">
+      <div class="input-icons"><div class="icon">+</div></div>
+      <input type="text" id="messageInput" placeholder="iMessage" />
       <div class="send-button" onclick="sendMessage()">↑</div>
     </div>
   </div>
@@ -274,49 +219,36 @@
         img.className = 'image-message';
 
         img.onclick = (e) => {
-  e.preventDefault();
+          e.preventDefault();
 
-  // 이전 active 제거
-  document.querySelectorAll('.image-message.active').forEach(el => {
-    el.classList.remove('active');
-    const oldPopup = el.parentNode.querySelector('.emoji-popup');
-    if (oldPopup) oldPopup.remove();
-  });
+          // 블러 오버레이 생성
+          const blur = document.createElement('div');
+          blur.className = 'blur-overlay';
 
-  // 현재 이미지에 확대 효과
-  img.classList.add('active');
-  img.parentNode.style.position = 'relative'; // popup 위치 기준
+          // 이모지 팝업
+          const popup = document.createElement('div');
+          popup.className = 'emoji-popup';
 
-  // 이모지 팝업 생성
-  const popup = document.createElement('div');
-  popup.className = 'emoji-popup';
-  popup.style.position = 'absolute';
-  popup.style.top = '-48px';
-  popup.style.left = '50%';
-  popup.style.transform = 'translateX(-50%)';
-  popup.style.zIndex = '1002';
+          const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
+          emojis.forEach((emoji) => {
+            const e = document.createElement('div');
+            e.textContent = emoji;
+            e.onclick = () => {
+              document.body.removeChild(blur);
+              popup.remove();
+              if (emoji === '❤️') triggerEmojiExplosionAndRedirect();
+            };
+            popup.appendChild(e);
+          });
 
-  const emojis = ['❤️', '👍', '👎', '😂', '‼️', '❓'];
-  emojis.forEach((emoji) => {
-    const e = document.createElement('div');
-    e.textContent = emoji;
-    if (emoji === '❤️') {
-      e.onclick = () => {
-        img.classList.remove('active');
-        popup.remove();
-        triggerEmojiExplosionAndRedirect();
-      };
-    } else {
-      e.onclick = () => {
-        img.classList.remove('active');
-        popup.remove();
-      };
-    }
-    popup.appendChild(e);
-  });
+          // 확대
+          img.style.transform = 'scale(1.1)';
+          img.style.zIndex = '1001';
 
-  img.parentNode.appendChild(popup);
-};
+          // overlay 위에 이모지 추가
+          blur.appendChild(popup);
+          document.body.appendChild(blur);
+        };
 
         wrapper.appendChild(img);
       } else {
@@ -357,18 +289,19 @@
       if (!text) return;
       appendMessage(text, true);
       input.value = '';
+    }
 
-function triggerEmojiExplosionAndRedirect() {
-  const emojis = ['😍', '😎', '🥰', '💕', '❤️'];
-  const explosionContainer = document.createElement('div');
-  explosionContainer.style.position = 'fixed';
-  explosionContainer.style.top = '0';
-  explosionContainer.style.left = '0';
-  explosionContainer.style.width = '100%';
-  explosionContainer.style.height = '100%';
-  explosionContainer.style.pointerEvents = 'none';
-  explosionContainer.style.zIndex = '9999';
-  document.body.appendChild(explosionContainer);
+    function triggerEmojiExplosionAndRedirect() {
+      const emojis = ['😍', '😎', '🥰', '💕', '❤️'];
+      const container = document.createElement('div');
+      container.style.position = 'fixed';
+      container.style.top = 0;
+      container.style.left = 0;
+      container.style.width = '100%';
+      container.style.height = '100%';
+      container.style.pointerEvents = 'none';
+      container.style.zIndex = '9999';
+      document.body.appendChild(container);
 
       for (let i = 0; i < 80; i++) {
         const emoji = document.createElement('div');
@@ -380,7 +313,7 @@ function triggerEmojiExplosionAndRedirect() {
         emoji.style.setProperty('--x', `${Math.random() * 400 - 200}px`);
         emoji.style.setProperty('--y', `${Math.random() * 400 - 200}px`);
         emoji.style.animation = `emojiExplosion 1s forwards`;
-        explosionContainer.appendChild(emoji);
+        container.appendChild(emoji);
       }
 
       setTimeout(() => {
@@ -392,17 +325,17 @@ function triggerEmojiExplosionAndRedirect() {
       appendMessage('지금은 수업 중입니다.', true);
 
       setTimeout(() => {
-        const typingBubble = showTypingIndicator();
+        const typing = showTypingIndicator();
 
         setTimeout(() => {
-          typingBubble.remove();
+          typing.remove();
           appendMessage('그렇습니까', false);
 
           setTimeout(() => {
             appendMessage('보고싶습니당', false);
 
             setTimeout(() => {
-              appendMessage('', false, true);
+              appendMessage('', false, true); // 이미지 메시지
             }, 1000);
           }, 1000);
         }, 1000);
