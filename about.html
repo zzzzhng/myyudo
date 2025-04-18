@@ -365,9 +365,9 @@
         emoji.style.left = '50%';
         emoji.style.top = '50%';
         emoji.style.fontSize = '28px';
-        emoji.style.setProperty('--x', ${Math.random() * 400 - 200}px);
-        emoji.style.setProperty('--y', ${Math.random() * 400 - 200}px);
-        emoji.style.animation = emojiExplosion 1s forwards;
+        emoji.style.setProperty('--x', `${Math.random() * 400 - 200}px`);
+        emoji.style.setProperty('--y', `${Math.random() * 400 - 200}px`);
+        emoji.style.animation = `emojiExplosion 1s forwards`;
         explosionContainer.appendChild(emoji);
       }
 
