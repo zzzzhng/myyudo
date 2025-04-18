@@ -122,20 +122,21 @@
       gap: 8px;
     }
 
-    .play-btn {
-      background-color: #dcdcdc;
-      color: #ff2d55;
-    }
-
-    .shuffle-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background-color: #dcdcdc;
-      color: #ff2d55;
-      font-weight: 500;
-    }
+.play-btn,
+.shuffle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #dcdcdc;
+  color: #ff2d55;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 12px 0;
+  flex: 1;
+  border: none;
+  font-size: 16px;
+}
 
     .shuffle-btn .icon {
       display: flex;
@@ -364,10 +365,14 @@
     <div class="playlist-title">무제 플레이리스트</div>
     <div class="playlist-updated">1주일 전 업데이트됨</div>
 
-    <div class="controls">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff2d55" viewBox="0 0 16 16">
-      <path d="M4 3.993v8.014c0 .53.608.846 1.043.53l6.07-4.007a.636.636 0 000-1.06L5.043 3.462A.636.636 0 004 3.993z"/>
-    </svg>
+<div class="controls">
+  <button class="play-btn">
+    <span class="icon">
+      <!-- ▶️ 아이콘 -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff2d55" viewBox="0 0 16 16">
+        <path d="M4 3.993v8.014c0 .53.608.846 1.043.53l6.07-4.007a.636.636 0 000-1.06L5.043 3.462A.636.636 0 004 3.993z"/>
+      </svg>
+    </span>
     재생
   </button>
 
@@ -383,7 +388,8 @@
     </span>
     임의 재생
   </button>
-    </div>
+</div>
+
 
     <ul class="music-list">
       <li class="music-item">
