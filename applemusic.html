@@ -16,8 +16,17 @@
       background-color: white;
       width: 390px;
       height: 844px;
-      overflow-y: scroll;
+      overflow: hidden;
       position: relative;
+    }
+
+    .scroll-area {
+      position: absolute;
+      top: 60px;
+      bottom: 60px;
+      width: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .navbar {
@@ -26,12 +35,11 @@
       padding: 16px 12px 8px;
       font-size: 18px;
       font-weight: 500;
-    }
-
-    .navbar img {
-      width: 20px;
-      height: 20px;
-      margin-right: 12px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: white;
+      z-index: 10;
     }
 
     .search-container {
@@ -42,7 +50,7 @@
       max-width: 390px;
       margin: 0 auto;
       box-sizing: border-box;
-      margin-bottom: 20px; /* ✅ 검색창과 영상 사이 간격 추가 */
+      margin-bottom: 20px;
     }
 
     .search-bar {
@@ -115,26 +123,25 @@
     }
 
     .play-btn {
-      background-color: #ff2d55;
-      color: white;
+      background-color: #dcdcdc;
+      color: #ff2d55;
     }
 
-   .shuffle-btn {
+    .shuffle-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px; /* 아이콘과 텍스트 사이 간격 */
+      gap: 8px;
       background-color: #dcdcdc;
       color: #ff2d55;
       font-weight: 500;
     }
 
-  .shuffle-btn .icon {
+    .shuffle-btn .icon {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-
 
     .music-list {
       list-style: none;
@@ -153,74 +160,74 @@
       width: 46px;
       height: 46px;
       border-radius: 8px;
-      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
       margin-right: 12px;
+      background-color: #ccc;
     }
 
     .music-info {
       font-size: 16px;
     }
 
+    .music-info .artist {
+      font-size: 13px;
+      color: #888;
+      margin-top: 2px;
+    }
+
     .now-playing-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 390px;
-  height: 60px;
-  background-color: white;
-  border-top: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
-  box-sizing: border-box;
-  z-index: 10;
-}
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 390px;
+      height: 60px;
+      background-color: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      box-sizing: border-box;
+      z-index: 10;
+    }
 
-.now-playing-left {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  flex: 1;
-  min-width: 0;
-}
+    .now-playing-left {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      flex: 1;
+      min-width: 0;
+    }
 
-.music-cover {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background-color: #ccc;
-  flex-shrink: 0;
-}
+    .now-playing-info {
+      margin-left: 12px;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #000;
+    }
 
-.now-playing-info {
-  margin-left: 12px;
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #000;
-}
+    .now-playing-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: 12px;
+      flex-shrink: 0;
+    }
 
-.now-playing-controls {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-left: 12px;
-  flex-shrink: 0;
-}
-
-.now-playing-controls svg {
-  display: block;
-}
-
+    .now-playing-controls svg {
+      display: block;
+    }
 
     .shareplay-popup {
       position: fixed;
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%) scale(0.95);
-      width: 380px; height: 380px;
+      width: 380px;
+      height: 380px;
       background: white;
       border-radius: 28px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
@@ -340,110 +347,87 @@
   </style>
 </head>
 <body>
-
   <div class="navbar">
-    <!-- 엑박 방지: 텍스트로 대체 -->
-    <span style="font-size: 20px; margin-right: 12px;">←</span>
+    <span style="font-size: 20px; margin-right: 12px;">&larr;</span>
     무제 플레이리스트
   </div>
 
-  <div class="search-container">
-    <input type="text" class="search-bar" placeholder="검색" />
+  <div class="scroll-area">
+    <div class="search-container">
+      <input type="text" class="search-bar" placeholder="검색" />
+    </div>
+
+    <div class="playlist-cover">
+      <video src="videos/a1.MP4" autoplay muted loop playsinline></video>
+    </div>
+
+    <div class="playlist-title">무제 플레이리스트</div>
+    <div class="playlist-updated">1주일 전 업데이트됨</div>
+
+    <div class="controls">
+      <button class="play-btn">재생</button>
+      <button class="shuffle-btn">임의 재생</button>
+    </div>
+
+    <ul class="music-list">
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a1.JPG');"></div>
+        <div class="music-info">0310<div class="artist">백예린</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a2.JPG');"></div>
+        <div class="music-info">우주선<div class="artist">정승환</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a3.JPG');"></div>
+        <div class="music-info">독 (feat. E SENS)<div class="artist">프라이머리</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a4.JPG');"></div>
+        <div class="music-info">Mondegreen<div class="artist">데이먼스 이어</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a5.JPG');"></div>
+        <div class="music-info">동그라미<div class="artist">최유리</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a6.JPG');"></div>
+        <div class="music-info">Shukumei<div class="artist">OFFICIAL HIGE DANDISM</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a7.JPG');"></div>
+        <div class="music-info">고백<div class="artist">정준일</div></div>
+      </li>
+      <li class="music-item">
+        <div class="music-cover" style="background-image: url('aimages/a8.JPG');"></div>
+        <div class="music-info">나무<div class="artist">카더가든</div></div>
+      </li>
+    </ul>
   </div>
-
-  <div class="playlist-cover">
-    <video src="videos/a1.MP4" autoplay muted loop playsinline></video>
-  </div>
-
-  <div class="playlist-title">무제 플레이리스트</div>
-  <div class="playlist-updated">1주일 전 업데이트됨</div>
-
-  <div class="controls">
-    <button class="play-btn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-        <path d="M4 3.993v8.014c0 .53.608.846 1.043.53l6.07-4.007a.636.636 0 000-1.06L5.043 3.462A.636.636 0 004 3.993z"/>
-      </svg>
-      재생
-    </button>
-
-    <button class="shuffle-btn">
-      <span class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff2d55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <!-- 위쪽 곡선 -->
-        <path d="M3 6h3c2 0 4 4 6 6s4 4 6 4" />
-      <!-- 위쪽 화살표 -->
-        <polyline points="18 14 21 16 18 18" transform="translate(0 -8)" />
-      <!-- 아래쪽 곡선 -->
-        <path d="M3 18h3c2 0 4-4 6-6s4-4 6-4" />
-      <!-- 아래쪽 화살표 -->
-        <polyline points="18 14 21 16 18 18" transform="translate(0 0)" />
-      </svg>
-    </span>
-    임의 재생
-  </button>
-  </div>
-
-  <ul class="music-list">
-    <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">0310</div>
-    </li>
-    <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">우주선</div>
-    </li>
-    <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">독 (feat. E SENS)</div>
-    </li>
-     <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">Mondegreen</div>
-    </li>
-     <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">동그라미</div>
-    </li>
-     <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">Shukumei</div>
-    </li>
-    <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">나무</div>
-    </li>
-    <li class="music-item">
-      <div class="music-cover"></div>
-      <div class="music-info">고백</div>
-    </li>
-  </ul>
 
   <div class="now-playing-bar">
-  <div class="now-playing-left">
-    <div class="music-cover"></div>
-    <div class="now-playing-info">Aqua Man</div>
+    <div class="now-playing-left">
+      <div class="music-cover" style="background-image: url('aimages/a6.jpg');"></div>
+      <div class="now-playing-info">Aqua Man</div>
+    </div>
+    <div class="now-playing-controls">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke="#000" stroke-width="2" stroke-linecap="round">
+        <line x1="6" y1="4" x2="6" y2="20" />
+        <line x1="14" y1="4" x2="14" y2="20" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000">
+        <polygon points="5,4 15,12 5,20" />
+        <rect x="15" y="4" width="2" height="16" />
+      </svg>
+    </div>
   </div>
-  <div class="now-playing-controls">
-    <!-- Pause SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke="#000" stroke-width="2" stroke-linecap="round">
-      <line x1="6" y1="4" x2="6" y2="20" />
-      <line x1="14" y1="4" x2="14" y2="20" />
-    </svg>
-    <!-- Next SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000">
-      <polygon points="5,4 15,12 5,20" />
-      <rect x="15" y="4" width="2" height="16" />
-    </svg>
-  </div>
-</div>
-
 
   <div class="shareplay-popup">
     <div class="shareplay-header">
       <button id="close-shareplay">X</button>
       <img src="images/SharePlay.jpg" alt="Profile" />
       <h2>신정환님과 연결하겠습니까?</h2>
-      <p>사용자의 기기에서 Aapple Music의 재생 콘텐츠를 제어할 수 있습니다.</p>
+      <p>사용자의 기기에서 Apple Music의 재생 콘텐츠를 제어할 수 있습니다.</p>
     </div>
 
     <div class="shareplay-profile">
@@ -457,9 +441,9 @@
     <div class="sub-text">계정 설정에서 사용자의 이름 및 사진을 언제든지 편집할 수 있습니다.</div>
 
     <div class="shareplay-footer">
-  <a href="photos.html" style="text-decoration: none;">
-    <button>연결</button>
-     </a>
+      <a href="photos.html" style="text-decoration: none;">
+        <button>연결</button>
+      </a>
     </div>
   </div>
 
